@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anime Expeditions Wiki | Dark Edition & Guia de Evoluções</title>
+    <title>Anime Expeditions Wiki | Edição Completa e Detalhada</title>
     <style>
         :root {
             --bg-color: #000000;
@@ -16,13 +16,22 @@
             --border-color: #1a1a20;
             --infobox-bg: #08080a;
             
-            /* Cores dos Tiers da Imagem */
+            /* Destaques dos Códigos */
+            --cyan-accent: #00d2ff;
+            --card-code-bg: #060d13;
+            --card-code-border: #132a38;
+
+            /* Cores dos Tiers / Raridades */
             --tier-overall: #ff77e9;
             --tier-metadps: #ff4a4a;
             --tier-dps: #ffb84d;
             --tier-metasuporte: #4de6ff;
             --tier-suporte: #4d88ff;
             --tier-farms: #ffff4d;
+            --rarity-secret: #ff2a2a;
+            --rarity-exclusive: #d800ff;
+            --rarity-mythic: #00d2ff;
+            --rarity-legendary: #ffb84d;
         }
 
         * {
@@ -61,9 +70,7 @@
             gap: 8px;
         }
 
-        .navbar .logo span {
-            color: var(--accent-color);
-        }
+        .navbar .logo span { color: var(--accent-color); }
 
         .search-bar input {
             background: #111115;
@@ -91,91 +98,357 @@
             border: 1px solid var(--border-color);
         }
 
+        /* ----- ESTILO DO MENU INTERATIVO ----- */
+        .interactive-menu-container {
+            background: #09080e;
+            border: 2px solid #241432;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 35px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .top-nav-tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .tab-btn {
+            background: #020b10;
+            border: 2px solid #00d2ff;
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: bold;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .tab-btn.codes { border-color: #00d2ff; }
+        .tab-btn.tierlist { border-color: #d800ff; }
+
+        .tab-btn:hover, .tab-btn.active {
+            transform: translateY(-2px);
+            filter: brightness(1.25);
+            box-shadow: 0 0 12px rgba(0, 210, 255, 0.4);
+        }
+
+        .menu-category-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            gap: 15px;
+        }
+
+        .category-label {
+            width: 90px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #ffffff;
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .category-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            flex-grow: 1;
+        }
+
+        .sub-btn {
+            background: linear-gradient(180deg, #9d4edd 0%, #5a189a 100%);
+            border: 1px solid #c77dff;
+            color: #ffffff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+            flex: 1 1 calc(20% - 10px);
+            justify-content: center;
+            min-width: 100px;
+            user-select: none;
+        }
+
+        .sub-btn:hover, .sub-btn.active {
+            background: linear-gradient(180deg, #b5179e 0%, #7209b7 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 0 10px rgba(181, 23, 158, 0.6);
+        }
+
+        /* ----- SISTEMA DE PÁGINAS OCULTAS ----- */
+        .page-view {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .page-view.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Estrutura de Conteúdo */
         h1.wiki-title {
-            font-size: 2.4rem;
+            font-size: 2.1rem;
             color: #fff;
             border-bottom: 3px solid var(--accent-color);
             padding-bottom: 10px;
             margin-bottom: 20px;
         }
 
-        .intro-quote {
-            background: #111116;
-            border-left: 4px solid var(--accent-color);
-            padding: 18px 22px;
-            margin-bottom: 25px;
-            border-radius: 0 8px 8px 0;
-            font-size: 1.05rem;
-        }
-
-        .toc {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 20px 25px;
-            border-radius: 8px;
-            margin-bottom: 35px;
-            display: inline-block;
-            width: 100%;
-        }
-
-        .toc h3 {
-            font-size: 1.2rem;
-            margin-bottom: 12px;
-            color: var(--accent-color);
-        }
-
-        .toc ul {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 8px;
-            list-style: none;
-        }
-
-        .toc a {
-            color: #ff4d4d;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .toc a:hover {
-            text-decoration: underline;
-        }
-
         h2 {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             color: #fff;
-            margin-top: 40px;
-            margin-bottom: 18px;
+            margin-top: 25px;
+            margin-bottom: 15px;
             border-bottom: 2px solid var(--border-color);
             padding-bottom: 8px;
         }
 
         h3 {
-            font-size: 1.25rem;
-            color: #ffffff;
-            margin-top: 22px;
-            margin-bottom: 10px;
-        }
-
-        p {
-            margin-bottom: 15px;
-            color: var(--text-sub);
-        }
-
-        ul, ol {
-            margin-left: 20px;
-            margin-bottom: 20px;
-            color: var(--text-sub);
-        }
-
-        li {
+            font-size: 1.15rem;
+            color: #00d2ff;
+            margin-top: 15px;
             margin-bottom: 8px;
+        }
+
+        .intro-quote {
+            background: #111116;
+            border-left: 4px solid var(--accent-color);
+            padding: 16px;
+            margin-bottom: 25px;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.95rem;
+            color: #ddd;
+        }
+
+        /* ----- DESIGN INTERATIVO DOS GAMEMODES ----- */
+        .gm-section-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin: 25px 0 6px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .gm-section-desc {
+            font-size: 0.88rem;
+            color: #a0a0a0;
+            margin-bottom: 14px;
+        }
+
+        .gm-banner-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .gm-banner-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 22px;
+            border-radius: 8px;
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            border: 2px solid transparent;
+            box-shadow: inset 0 1px 2px rgba(255,255,255,0.25), 0 4px 10px rgba(0,0,0,0.6);
+            user-select: none;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gm-banner-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.2);
+            box-shadow: inset 0 1px 2px rgba(255,255,255,0.4), 0 6px 15px rgba(0,0,0,0.8);
+        }
+
+        .gm-story { background: linear-gradient(180deg, #1d52d8 0%, #082882 100%); border-color: #3b76ff; }
+        .gm-raid { background: linear-gradient(180deg, #b81414 0%, #520505 100%); border-color: #ff3333; }
+        .gm-challenge { background: linear-gradient(180deg, #d97b00 0%, #683800 100%); border-color: #ffa400; }
+        .gm-expeditions { background: linear-gradient(180deg, #62b322 0%, #295b0b 100%); border-color: #8ce043; }
+        .gm-tournament { background: linear-gradient(180deg, #d98200 0%, #683d00 100%); border-color: #ffb400; }
+        .gm-global { background: linear-gradient(180deg, #b81414 0%, #520505 100%); border-color: #ff3333; }
+        .gm-sandbox { background: linear-gradient(180deg, #6e1dbd 0%, #32075e 100%); border-color: #a842ff; }
+
+        .gm-banner-btn::before {
+            content: "✦";
+            font-size: 1.2rem;
+            color: #ffffff;
+            opacity: 0.9;
+        }
+
+        .gm-detail-box {
+            display: none;
+            background: #0b0c10;
+            border: 2px solid #202433;
+            border-radius: 10px;
+            padding: 22px;
+            margin-top: 15px;
+            margin-bottom: 25px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .gm-detail-box.active { display: block; }
+
+        .gm-detail-title {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid #202433;
+            padding-bottom: 10px;
+        }
+
+        .tips-card {
+            background: #081117;
+            border: 1px solid #143d54;
+            border-left: 5px solid #00d2ff;
+            padding: 18px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .tips-card h4 {
+            color: #00d2ff;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tips-card ul { margin-left: 20px; color: #d5d5d5; font-size: 0.92rem; }
+        .tips-card li { margin-bottom: 8px; line-height: 1.5; }
+
+        .codes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .code-card {
+            background-color: var(--card-code-bg);
+            border: 2px solid var(--card-code-border);
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .code-card-header { display: flex; justify-content: flex-end; }
+        .badge-active {
+            background-color: var(--cyan-accent);
+            color: #000;
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 3px 12px;
+            border-radius: 12px;
+            text-transform: uppercase;
+        }
+
+        .code-input-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #02070b;
+            border: 1px dashed var(--cyan-accent);
+            border-radius: 10px;
+            padding: 6px 6px 6px 14px;
+        }
+
+        .code-text {
+            font-family: monospace;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .copy-btn {
+            background: linear-gradient(180deg, #00d2ff 0%, #0088cc 100%);
+            border: 1px solid #55e0ff;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 0.85rem;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover { filter: brightness(1.2); }
+
+        .rewards-title {
+            text-align: center;
+            color: var(--cyan-accent);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        .rewards-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .reward-item {
+            background: #02070b;
+            border: 1px solid #1a3c50;
+            border-radius: 8px;
+            padding: 8px 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.82rem;
+            color: #e0e0e0;
+            flex: 1 1 calc(50% - 8px);
+            min-width: 110px;
+        }
+
+        .reward-badge {
+            background: #ffaa00;
+            color: #000;
+            font-weight: 900;
+            font-size: 0.7rem;
+            padding: 2px 5px;
+            border-radius: 4px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0 30px 0;
+            margin: 20px 0;
             background-color: var(--card-bg);
             border-radius: 8px;
             overflow: hidden;
@@ -185,127 +458,105 @@
             padding: 12px 15px;
             text-align: left;
             border-bottom: 1px solid var(--border-color);
-            font-size: 0.95rem;
+            font-size: 0.92rem;
         }
 
-        th {
-            background-color: #18181f;
-            color: #fff;
-            font-weight: 600;
-        }
+        th { background-color: #18181f; color: #fff; }
 
-        tr:hover {
-            background-color: #16161d;
-        }
+        .badge-overall { background: var(--tier-overall); color: #000; font-weight: bold; padding: 4px 10px; border-radius: 4px; }
+        .badge-metadps { background: var(--tier-metadps); color: #fff; font-weight: bold; padding: 4px 10px; border-radius: 4px; }
+        .badge-dps { background: var(--tier-dps); color: #000; font-weight: bold; padding: 4px 10px; border-radius: 4px; }
+        .badge-metasuporte { background: var(--tier-metasuporte); color: #000; font-weight: bold; padding: 4px 10px; border-radius: 4px; }
+        .badge-suporte { background: var(--tier-suporte); color: #fff; font-weight: bold; padding: 4px 10px; border-radius: 4px; }
+        .badge-farms { background: var(--tier-farms); color: #000; font-weight: bold; padding: 4px 10px; border-radius: 4px; }
 
-        /* Encartes de Tiers */
-        .badge-overall { background: var(--tier-overall); color: #000; font-weight: bold; padding: 5px 12px; border-radius: 4px; display: inline-block; font-style: italic; }
-        .badge-metadps { background: var(--tier-metadps); color: #fff; font-weight: bold; padding: 5px 12px; border-radius: 4px; display: inline-block; font-style: italic; }
-        .badge-dps { background: var(--tier-dps); color: #000; font-weight: bold; padding: 5px 12px; border-radius: 4px; display: inline-block; font-style: italic; }
-        .badge-metasuporte { background: var(--tier-metasuporte); color: #000; font-weight: bold; padding: 5px 12px; border-radius: 4px; display: inline-block; font-style: italic; }
-        .badge-suporte { background: var(--tier-suporte); color: #fff; font-weight: bold; padding: 5px 12px; border-radius: 4px; display: inline-block; font-style: italic; }
-        .badge-farms { background: var(--tier-farms); color: #000; font-weight: bold; padding: 5px 12px; border-radius: 4px; display: inline-block; font-style: italic; }
+        .badge-secret { background: var(--rarity-secret); color: #fff; font-weight: bold; padding: 2px 8px; border-radius: 4px; }
+        .badge-exclusive { background: var(--rarity-exclusive); color: #fff; font-weight: bold; padding: 2px 8px; border-radius: 4px; }
+        .badge-mythic { background: var(--rarity-mythic); color: #000; font-weight: bold; padding: 2px 8px; border-radius: 4px; }
 
-        /* Estilização Personalizada para as Evoluções */
-        .evolve-grid {
+        .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 20px;
-            margin: 20px 0 30px 0;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
         }
 
-        .evolve-card {
+        .info-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 20px;
-            transition: border-color 0.2s, transform 0.2s;
+            padding: 16px;
         }
 
-        .evolve-card:hover {
-            border-color: var(--accent-color);
-            transform: translateY(-2px);
-        }
-
-        .evolve-title {
-            font-size: 1.15rem;
+        .info-card-title {
+            font-size: 1.1rem;
             font-weight: bold;
-            color: #ffffff;
+            color: #00d2ff;
+            margin-bottom: 8px;
             border-bottom: 1px solid var(--border-color);
-            padding-bottom: 8px;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            padding-bottom: 4px;
         }
 
-        .evolve-title span {
-            color: var(--accent-color);
-            font-size: 0.95rem;
-        }
-
-        .evolve-reqs {
-            background: #08080a;
-            border-radius: 6px;
-            padding: 10px 12px;
-            margin-bottom: 12px;
-            font-size: 0.9rem;
-            color: #bbbbbb;
-            border-left: 3px solid #ffb84d;
-        }
-
-        .evolve-reqs strong {
-            color: #ffffff;
-        }
-
-        .evolve-skills {
-            font-size: 0.9rem;
-            color: var(--text-sub);
-        }
-
-        .evolve-skills strong {
-            color: #4de6ff;
-        }
-
+        /* ----- ESTILOS DA SIDEBAR (INFOBOX) ----- */
         .infobox {
-            background-color: var(--infobox-bg);
+            background-color: #0d0d11;
             border: 2px solid var(--accent-color);
-            border-radius: 10px;
-            padding: 20px;
+            border-radius: 12px;
+            padding: 16px;
             align-self: start;
+            box-shadow: 0 0 15px rgba(255, 42, 42, 0.2);
         }
 
         .infobox-title {
             text-align: center;
-            font-size: 1.4rem;
-            font-weight: bold;
+            font-size: 1.3rem;
+            font-weight: 800;
             color: #fff;
             background: var(--accent-color);
-            padding: 8px;
-            border-radius: 6px;
+            padding: 10px;
+            border-radius: 8px;
             margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .infobox-image {
+        .infobox-banner {
             width: 100%;
-            height: 190px;
-            background: #111;
-            border-radius: 6px;
-            overflow: hidden;
+            height: auto;
+            border-radius: 8px;
             margin-bottom: 15px;
-            border: 1px solid var(--border-color);
+            display: block;
+            border: 1px solid #222;
+            object-fit: cover;
         }
 
         .infobox-data {
             width: 100%;
-            font-size: 0.95rem;
-            margin-bottom: 0;
+            font-size: 0.9rem;
+            border-collapse: separate;
+            border-spacing: 0 6px;
+            margin: 0;
+            background: transparent;
+        }
+
+        .infobox-data tr td {
+            padding: 8px 12px;
+            background: #13131a;
+            border-bottom: none;
         }
 
         .infobox-data tr td:first-child {
             font-weight: bold;
-            color: var(--text-sub);
+            color: #ffffff;
             width: 45%;
+            border-top-left-radius: 6px;
+            border-bottom-left-radius: 6px;
+        }
+
+        .infobox-data tr td:last-child {
+            color: #dddddd;
+            border-top-right-radius: 6px;
+            border-bottom-right-radius: 6px;
         }
 
         .play-btn {
@@ -315,40 +566,23 @@
             background-color: var(--accent-color);
             color: #fff;
             padding: 12px;
-            border-radius: 6px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: bold;
+            font-size: 1rem;
             margin-top: 15px;
-            transition: 0.2s;
+            transition: background 0.2s, transform 0.1s;
         }
 
         .play-btn:hover {
             background-color: var(--accent-hover);
-        }
-
-        .guide-step {
-            background-color: #121217;
-            border-left: 4px solid var(--accent-color);
-            padding: 18px;
-            margin-bottom: 20px;
-            border-radius: 4px;
-        }
-
-        .code-box {
-            background-color: #050507;
-            border: 1px dashed var(--accent-color);
-            padding: 18px;
-            border-radius: 6px;
-            margin: 20px 0;
-            font-family: monospace;
-            font-size: 1rem;
-            line-height: 1.8;
+            transform: translateY(-1px);
         }
 
         @media (max-width: 960px) {
-            .container {
-                grid-template-columns: 1fr;
-            }
+            .container { grid-template-columns: 1fr; }
+            .menu-category-row { flex-direction: column; align-items: flex-start; }
+            .category-label { text-align: left; width: 100%; }
         }
     </style>
 </head>
@@ -362,275 +596,587 @@
     </nav>
 
     <div class="container">
-        
         <main class="main-content">
-            <h1 class="wiki-title">Anime Expeditions: Guia Mestre & Enciclopédia</h1>
+            
+            <div class="interactive-menu-container">
+                <div class="top-nav-tabs">
+                    <div class="tab-btn codes active" onclick="switchPage('codes-page', this)">🎁 Codes</div>
+                    <div class="tab-btn tierlist" onclick="switchPage('tierlist-page', this)">🏆 Tier List</div>
+                </div>
 
-            <div class="intro-quote">
-                Bem-vindo à Wiki oficial! Confira abaixo o guia completo de **Evoluções de Personagens**, a **Tier List oficial por funções** e todas as dicas para dominar o jogo.
+                <div class="menu-category-row">
+                    <div class="category-label">Units</div>
+                    <div class="category-buttons">
+                        <button class="sub-btn" onclick="switchPage('units-page', this)">🛡️ Units</button>
+                        <button class="sub-btn" onclick="switchPage('elements-page', this)">⚙️ Elements</button>
+                        <button class="sub-btn" onclick="switchPage('archetypes-page', this)">🔱 Archetypes</button>
+                        <button class="sub-btn" onclick="switchPage('traits-page', this)">⚙️ Traits</button>
+                        <button class="sub-btn" onclick="switchPage('effects-page', this)">👁️ Effects</button>
+                    </div>
+                </div>
+
+                <div class="menu-category-row">
+                    <div class="category-label">Gameplay</div>
+                    <div class="category-buttons">
+                        <button class="sub-btn" onclick="switchPage('gamemodes-page', this)">🏰 Gamemodes</button>
+                        <button class="sub-btn" onclick="switchPage('enemies-page', this)">👾 Enemies</button>
+                        <button class="sub-btn" onclick="switchPage('modifiers-page', this)">🔨 Modifiers</button>
+                        <button class="sub-btn" onclick="switchPage('equipment-page', this)">⚔️ Equipment</button>
+                        <button class="sub-btn" onclick="switchPage('items-page', this)">🎒 Items</button>
+                    </div>
+                </div>
+
+                <div class="menu-category-row">
+                    <div class="category-label">Features</div>
+                    <div class="category-buttons">
+                        <button class="sub-btn" onclick="switchPage('events-page', this)">🏆 Events</button>
+                        <button class="sub-btn" onclick="switchPage('battlepass-page', this)">🎟️ Battlepass</button>
+                        <button class="sub-btn" onclick="switchPage('store-page', this)">🛒 Store</button>
+                        <button class="sub-btn" onclick="switchPage('shops-page', this)">🏬 Shops</button>
+                    </div>
+                </div>
             </div>
 
-            <div class="toc">
-                <h3>📜 Índice de Conteúdo</h3>
-                <ul>
-                    <li><a href="#evolucoes">1. Guia Oficial de Evoluções (Craft)</a></li>
-                    <li><a href="#tier-list">2. Tier List por Função</a></li>
-                    <li><a href="#traits-guia">3. Traits Recomendadas</a></li>
-                    <li><a href="#guia-progresso">4. Guia de Progressão</a></li>
-                    <li><a href="#codigos">5. Códigos Ativos</a></li>
-                    <li><a href="#modos">6. Modos de Jogo</a></li>
-                </ul>
-            </div>
-
-            <section id="evolucoes">
-                <h2>🧬 1. Guia Oficial de Evoluções (Evolve / Crafting)</h2>
-                <p>Confira abaixo todos os materiais, requisitos e novas habilidades desbloqueadas ao evoluir suas unidades:</p>
-
-                <div class="evolve-grid">
-                    <div class="evolve-card">
-                        <div class="evolve-title">Shadow <span>➔ Shadow (Divine)</span></div>
-                        <div class="evolve-reqs">
-                            <strong>Requisitos:</strong> 20x Sprites Azuis, 20x Verdes, 20x Vermelhos, 3x Rainbow e 10.000 Ouro.
+            <div id="codes-page" class="page-view active">
+                <h1 class="wiki-title">🎁 Todos os Códigos Ativos (Codes)</h1>
+                <div class="intro-quote">
+                    Resgate os códigos abaixo no menu de definições do jogo para receber Gems, Trait Crystals, Equipment Locks e Stat Rerolls grátis!
+                </div>
+                <div class="codes-grid">
+                    <div class="code-card">
+                        <div class="code-card-header"><span class="badge-active">Ativo</span></div>
+                        <div class="code-input-container">
+                            <span class="code-text">AE#1</span>
+                            <button class="copy-btn" onclick="copyCode('AE#1', this)">Copiar</button>
                         </div>
-                        <div class="evolve-skills">
-                            <strong>Habilidade Desbloqueada:</strong> <em>Divine Spirit</em> — Invoca um espírito que atordoa os inimigos e causa dano igual ao da própria unidade.
+                        <div class="rewards-title">Recompensas</div>
+                        <div class="rewards-grid">
+                            <div class="reward-item"><span class="reward-badge">5x</span> Eq. Lock</div>
+                            <div class="reward-item"><span class="reward-badge">5x</span> Eq. Reroll</div>
+                            <div class="reward-item"><span class="reward-badge">5x</span> Stat Lock</div>
+                            <div class="reward-item"><span class="reward-badge">1000x</span> Gem</div>
                         </div>
                     </div>
 
-                    <div class="evolve-card">
-                        <div class="evolve-title">Crimson <span>➔ Crimson (Brother)</span></div>
-                        <div class="evolve-reqs">
-                            <strong>Requisitos:</strong> 20x Sprites Vermelhos, 20x Rosas, 1x Rainbow e 5.000 Ouro.
+                    <div class="code-card">
+                        <div class="code-card-header"><span class="badge-active">Ativo</span></div>
+                        <div class="code-input-container">
+                            <span class="code-text">Release</span>
+                            <button class="copy-btn" onclick="copyCode('Release', this)">Copiar</button>
                         </div>
-                        <div class="evolve-skills">
-                            <strong>Habilidade Desbloqueada:</strong> <em>Piercing Crimson</em> — Ataque perfurante contínuo que aplica marcas nos inimigos atingidos.
-                        </div>
-                    </div>
-
-                    <div class="evolve-card">
-                        <div class="evolve-title">True Saint <span>➔ True Saint (Holy)</span></div>
-                        <div class="evolve-reqs">
-                            <strong>Requisitos:</strong> 1x Holy Pendant, 5 Sprites de cada cor (Vermelho, Azul, Verde, Roxo, Amarelo, Rosa), 1x Rainbow e 5.000 Ouro.
-                        </div>
-                        <div class="evolve-skills">
-                            <strong>Habilidade Desbloqueada:</strong> <em>Seize</em> — Rouba 20% do dano base dos três aliados mais fortes em campo.
+                        <div class="rewards-title">Recompensas</div>
+                        <div class="rewards-grid">
+                            <div class="reward-item"><span class="reward-badge">100x</span> Trait Crystal</div>
+                            <div class="reward-item"><span class="reward-badge">2500x</span> Gem</div>
                         </div>
                     </div>
 
-                    <div class="evolve-card">
-                        <div class="evolve-title">Cursed Student <span>➔ True Love</span></div>
-                        <div class="evolve-reqs">
-                            <strong>Requisitos:</strong> 1x Student ID, 20x Sprites Azuis, 20x Roxos, 1x Rainbow e 5.000 Ouro.
+                    <div class="code-card">
+                        <div class="code-card-header"><span class="badge-active">Ativo</span></div>
+                        <div class="code-input-container">
+                            <span class="code-text">EXPEDITIONS</span>
+                            <button class="copy-btn" onclick="copyCode('EXPEDITIONS', this)">Copiar</button>
                         </div>
-                        <div class="evolve-skills">
-                            <strong>Habilidades Desbloqueadas:</strong> <em>Cursed Mimicry</em> (Ataques de seguimento) e <em>Spirit Bats</em> (Invoca morcegos com efeito de sangramento).
-                        </div>
-                    </div>
-
-                    <div class="evolve-card">
-                        <div class="evolve-title">Salmon Sorcerer <span>➔ Grade 1</span></div>
-                        <div class="evolve-reqs">
-                            <strong>Requisitos:</strong> 1x Salmon, 20x Sprites Verdes, 20x Azuis, 1x Rainbow e 5.000 Ouro.
-                        </div>
-                        <div class="evolve-skills">
-                            <strong>Habilidades Desbloqueadas:</strong> <em>Crumble Away</em> (Reduz velocidade dos alvos) e <em>Plummet</em> (Atordoa inimigos próximos).
+                        <div class="rewards-title">Recompensas</div>
+                        <div class="rewards-grid">
+                            <div class="reward-item"><span class="reward-badge">30x</span> Eq. Lock</div>
+                            <div class="reward-item"><span class="reward-badge">30x</span> Eq. Reroll</div>
                         </div>
                     </div>
 
-                    <div class="evolve-card">
-                        <div class="evolve-title">Flame Emperor <span>➔ Reincarnate</span></div>
-                        <div class="evolve-reqs">
-                            <strong>Requisitos:</strong> 1x Burning Fruit, 20x Sprites Vermelhos, 20x Amarelos, 1x Rainbow e 5.000 Ouro.
+                    <div class="code-card">
+                        <div class="code-card-header"><span class="badge-active">Ativo</span></div>
+                        <div class="code-input-container">
+                            <span class="code-text">100K!</span>
+                            <button class="copy-btn" onclick="copyCode('100K!', this)">Copiar</button>
                         </div>
-                        <div class="evolve-skills">
-                            <strong>Habilidade Desbloqueada:</strong> <em>Wall of Fire</em> — Cria uma barreira de fogo permanente que causa efeito de queimadura.
-                        </div>
-                    </div>
-
-                    <div class="evolve-card">
-                        <div class="evolve-title">Puppet <span>➔ Puppet (Telekinetic)</span></div>
-                        <div class="evolve-reqs">
-                            <strong>Requisitos:</strong> 1x Puppet Heart, 20x Sprites Rosas, 20x Roxos, 1x Rainbow e 5.000 Ouro.
-                        </div>
-                        <div class="evolve-skills">
-                            <strong>Habilidade Desbloqueada:</strong> <em>Complete Control</em> — Empurra todos os inimigos afetados para trás por 2 segundos.
+                        <div class="rewards-title">Recompensas</div>
+                        <div class="rewards-grid">
+                            <div class="reward-item"><span class="reward-badge">50x</span> Trait Crystal</div>
+                            <div class="reward-item"><span class="reward-badge">20x</span> Stat Lock</div>
+                            <div class="reward-item"><span class="reward-badge">20x</span> Stat Reroll</div>
+                            <div class="reward-item"><span class="reward-badge">2500x</span> Gem</div>
                         </div>
                     </div>
 
-                    <div class="evolve-card">
-                        <div class="evolve-title">Elf Mage <span>➔ Elf Mage (Unleashed)</span></div>
-                        <div class="evolve-reqs">
-                            <strong>Requisitos:</strong> 1x Cosmic Magic, 20x Sprites Azuis, 20x Roxos, 1x Rainbow e 5.000 Ouro.
+                    <div class="code-card">
+                        <div class="code-card-header"><span class="badge-active">Ativo</span></div>
+                        <div class="code-input-container">
+                            <span class="code-text">30KLIKES!</span>
+                            <button class="copy-btn" onclick="copyCode('30KLIKES!', this)">Copiar</button>
                         </div>
-                        <div class="evolve-skills">
-                            <strong>Habilidades Desbloqueadas:</strong> <em>Arcane Magic</em> e <em>Arcane Spells</em> (Permite utilizar Old Magic, Eruption e Storm).
+                        <div class="rewards-title">Recompensas</div>
+                        <div class="rewards-grid">
+                            <div class="reward-item"><span class="reward-badge">2500x</span> Gem</div>
                         </div>
                     </div>
 
-                    <div class="evolve-card">
-                        <div class="evolve-title">String Demon <span>➔ Awakened</span></div>
-                        <div class="evolve-reqs">
-                            <strong>Requisitos:</strong> 1x Joker of the Nonsensical Pirates, 20x Sprites Amarelos, 20x Rosas, 1x Rainbow e 5.000 Ouro.
+                    <div class="code-card">
+                        <div class="code-card-header"><span class="badge-active">Ativo</span></div>
+                        <div class="code-input-container">
+                            <span class="code-text">100mvisits</span>
+                            <button class="copy-btn" onclick="copyCode('100mvisits', this)">Copiar</button>
                         </div>
-                        <div class="evolve-skills">
-                            <strong>Habilidade Desbloqueada:</strong> <em>String Sync</em> — Realiza ataques de seguimento automáticos sempre que um aliado próximo ataca.
+                        <div class="rewards-title">Recompensas</div>
+                        <div class="rewards-grid">
+                            <div class="reward-item"><span class="reward-badge">50x</span> Trait Crystal</div>
+                            <div class="reward-item"><span class="reward-badge">25x</span> Eq. Reroll</div>
+                            <div class="reward-item"><span class="reward-badge">25x</span> Stat Lock</div>
+                            <div class="reward-item"><span class="reward-badge">5000x</span> Gem</div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <section id="tier-list">
-                <h2>🏆 2. Tier List Oficial por Função</h2>
+            <div id="tierlist-page" class="page-view">
+                <h1 class="wiki-title">🏆 Tier List Oficial de Unidades</h1>
+                <div class="intro-quote">
+                    Classificação oficial atualizada das unidades com base no Meta atual do jogo.
+                </div>
                 <table>
                     <thead>
                         <tr>
                             <th>Categoria</th>
-                            <th>Personagens Inclusos</th>
+                            <th>Unidades</th>
                             <th>Função / Utilidade</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><span class="badge-overall">Overall</span></td>
-                            <td>Kage, Kenpachi, Pink Witch, Curse Boy (Yuta), White Devil, Flame Emperor (Sabo), Demon Girl, Masked Brawler</td>
-                            <td><strong>Melhores do Jogo:</strong> Dominam tanto em dano quanto em utilidade.</td>
+                            <td><span class="badge-overall">Overall Metas</span></td>
+                            <td>Kage, Kenpachi, Pink Witch, Curse Boy (Yuta), White Devil, Flame Emperor (Sabo)</td>
+                            <td><strong>Melhores do Meta:</strong> Desempenho absoluto em todos os modos.</td>
                         </tr>
                         <tr>
-                            <td><span class="badge-metadps">Meta Dps</span></td>
-                            <td>Kage, Kenpachi, White Devil, Curse Boy (Yuta), Pink Witch, Demon Girl</td>
-                            <td><strong>Dano Máximo Supremo:</strong> Maior DPS contra chefes e hordas pesadas.</td>
+                            <td><span class="badge-metadps">Meta DPS</span></td>
+                            <td>Shadow (Divine), 8th Sword (Berserk), Cursed Student, Elf Mage</td>
+                            <td><strong>Dano Massivo:</strong> Destroem chefes e hordas em segundos.</td>
                         </tr>
                         <tr>
-                            <td><span class="badge-dps">Dps</span></td>
-                            <td>Nekomata, Golden Armor, Hollow Reaper (Ichigo), Blood Brother (Choso), Flame Emperor (Sabo), Knight Chevalier</td>
-                            <td><strong>Dano Constante:</strong> Excelentes para limpeza e controle de rotas.</td>
+                            <td><span class="badge-dps">DPS Geral</span></td>
+                            <td>Nekomata, Golden Armor, Hollow Reaper (Ichigo), Blood Brother (Choso), Flame Emperor</td>
+                            <td><strong>Dano Constante:</strong> Aplicação constante de DoT (Bleed/Burn).</td>
                         </tr>
                         <tr>
-                            <td><span class="badge-metasuporte">Meta Suportes</span></td>
-                            <td>Masked Brawler, Kage, Ice Mage, Miko</td>
-                            <td><strong>Suportes Essenciais:</strong> Aplicam debuffs, desaceleração massiva (Slow) ou amplificação de dano.</td>
-                        </tr>
-                        <tr>
-                            <td><span class="badge-suporte">Suportes</span></td>
-                            <td>Red Glasses Boss, Shadow Beast, Rukia</td>
-                            <td><strong>Utilitários:</strong> Auxiliam com atordoamentos (Stuns) e empurrões (Knockback).</td>
+                            <td><span class="badge-metasuporte">Meta Suporte</span></td>
+                            <td>Toy Maker, True Saint (Holy), Masked Brawler, Ice Mage, Miko</td>
+                            <td><strong>Debuff & Buff:</strong> Desaceleração, Stun e aumento de dano global.</td>
                         </tr>
                         <tr>
                             <td><span class="badge-farms">Farms</span></td>
-                            <td>Green Doctor, Leorio/Cook</td>
-                            <td><strong>Economia:</strong> Geradores de dinheiro essenciais nas primeiras ondas.</td>
+                            <td>Ramen Guy, Greed, Green Doctor, Leorio/Cook</td>
+                            <td><strong>Economia:</strong> Geração massiva de Yen a cada onda.</td>
                         </tr>
                     </tbody>
                 </table>
-            </section>
+            </div>
 
-            <section id="traits-guia">
-                <h2>✨ 3. Passivas e Traits Recomendadas</h2>
+            <div id="gamemodes-page" class="page-view">
+                <h1 class="wiki-title">🏰 Modos de Jogo (Gamemodes)</h1>
+                <div class="intro-quote">
+                    Clique nos botões interativos das categorias para alternar entre os modos de jogo e visualizar todas as informações e estratégias detalhadas!
+                </div>
+
+                <div class="gm-section-title">Progressive</div>
+                <div class="gm-section-desc">The following is every Progressive Gamemode.</div>
+                <div class="gm-banner-grid">
+                    <div class="gm-banner-btn gm-story" onclick="openGamemodeDetail('gm-detail-story')">
+                        Story
+                    </div>
+                    <div class="gm-banner-btn gm-raid" onclick="openGamemodeDetail('gm-detail-raid')">
+                        Raid
+                    </div>
+                    <div class="gm-banner-btn gm-challenge" onclick="openGamemodeDetail('gm-detail-challenge')">
+                        Challenge
+                    </div>
+                    <div class="gm-banner-btn gm-expeditions" onclick="openGamemodeDetail('gm-detail-expeditions')">
+                        Expeditions
+                    </div>
+                </div>
+
+                <div class="gm-section-title">Competitive</div>
+                <div class="gm-section-desc">The following is every Competitive Gamemode.</div>
+                <div class="gm-banner-grid">
+                    <div class="gm-banner-btn gm-tournament" onclick="openGamemodeDetail('gm-detail-tournament')">
+                        Tournament
+                    </div>
+                    <div class="gm-banner-btn gm-global" onclick="openGamemodeDetail('gm-detail-global')">
+                        Global Tournament
+                    </div>
+                </div>
+
+                <div class="gm-section-title">Other</div>
+                <div class="gm-section-desc">The following is every miscellaneous Gamemode.</div>
+                <div class="gm-banner-grid">
+                    <div class="gm-banner-btn gm-sandbox" onclick="openGamemodeDetail('gm-detail-sandbox')">
+                        Sandbox
+                    </div>
+                </div>
+
+                <div id="gm-detail-expeditions" class="gm-detail-box active">
+                    <div class="gm-detail-title">🧭 Modo Expedition (Detalhado & Estratégias)</div>
+                    <p>O <strong>Modo Expedition</strong> é o pilar principal do jogo para a evolução de infraestrutura e farm de recursos. Nele, escolhe rotas num mapa interativo para defender uma carruagem (payload) contra hordas enquanto coleta materiais valiosos.</p>
+                    
+                    <h3 style="margin-top:18px; color:#8ce043;">🏛️ Todas as Instalações & Edifícios do Hub (Hub Upgrades)</h3>
+                    <p>Ao evoluir as construções da tua cidade (Hub), maximizas a produção contínua de recursos:</p>
+                    <ul style="margin-left:20px; font-size:0.92rem; color:#ccc; margin-top:8px;">
+                        <li><strong>Gold Mine (Mina de Ouro):</strong> Gera Gold passivamente no formato AFK.</li>
+                        <li><strong>Research Drill (Perfuradora):</strong> Produz <strong>Geodes</strong> automaticamente. Abres os Geodes consumindo o combustível (Fuel) recolhido no Expedition para obter uma quantidade massiva de recursos aleatórios de forma imediata.</li>
+                        <li><strong>Expedition Center / Prefeituras:</strong> Edifício central que liberta níveis de upgrade mais elevados para os restantes edifícios.</li>
+                        <li><strong>Training Grounds:</strong> Permite colocar unidades a treinar de forma 100% AFK para subirem de nível e ganharem XP continuamente.</li>
+                        <li><strong>Fábrica e Forja de Equipamentos:</strong> Fabrica, altera atributos (Reroll) e forja novos itens de combate.</li>
+                        <li><strong>Expedition Store (Loja Exclusiva):</strong> Loja especial que reinicia periodicamente (ex: a cada 24h) onde podes comprar Status Roll, Equipment Locks, Gemas e Trait Rerolls usando as moedas obtidas nas Expedições.</li>
+                        <li><strong>Missões da Expedição (Expedition Quests):</strong> Quests periódicas e semanais que concedem uma quantidade abundante de moedas ao completar tarefas do mapa.</li>
+                    </ul>
+
+                    <div class="tips-card">
+                        <h4>💡 Estratégia de Farm Rápido (2x Mais Rápido) - por Nanerki</h4>
+                        <ul>
+                            <li><strong>1. Seleção do Time Ideal:</strong>
+                                <ul>
+                                    <li><strong>Toy Maker:</strong> Indispensável para o modo. Muito fácil de obter: basta ir ao menu de Eventos, entrar no <em>Tournament</em>, causar um pouco de dano, perder a partida e ela será desbloqueada automaticamente no seu inventário.</li>
+                                    <li><strong>Composição Completa:</strong> Toy Maker, Rukia, Senku, Gaunter (Gowther), Kenpachi (Zaraki) e uma unidade de desaceleração/congelamento (como Frieren/Ice Mage).</li>
+                                    <li><em>Nota importante:</em> As passivas dos seus personagens NÃO contam dentro do Modo Expedition, então não é preciso gastar recursos rolando passivas raras para este modo.</li>
+                                </ul>
+                            </li>
+
+                            <li><strong>2. Técnica de "Reset de Rota" (Garantir o Máximo de Recursos):</strong>
+                                <ul>
+                                    <li>Jogue preferencialmente na <strong>Dificuldade 2</strong>.</li>
+                                    <li>Assim que a partida iniciar, abra o <strong>Expedition Map</strong> e observe a rota. Se ela indicar pouca madeira/recursos (ex: 11, 15 ou 19 madeiras), **REINICIE a partida** imediatamente.</li>
+                                    <li><strong>Regra de Ouro:</strong> Só continue a partida se a rota oferecer no mínimo <strong>26 a 29+ recursos</strong>. Em apenas 2 partidas com rotas altas, você consegue evoluir uma instalação inteira.</li>
+                                </ul>
+                            </li>
+
+                            <li><strong>3. Posicionamento e Rotação Sem Estresse:</strong>
+                                <ul>
+                                    <li><strong>Toy Maker:</strong> Coloque-a na parte de trás da carruagem, pois a maioria das hordas de inimigos surge pela retaguarda.</li>
+                                    <li><strong>Rukia & Senku:</strong> Coloque-os na parte frontal. Melhore o Senku até o nível máximo o mais rápido possível.</li>
+                                    <li><strong>Gowther (Gaunter):</strong> Assim que o Senku atingir o nível máximo, posiciona o Gaunter na retaguarda e melhore-o até que atinja cerca de <strong>4.1k de Dano</strong>.</li>
+                                    <li><strong>Kenpachi (Zaraki):</strong> Posicione o Zaraki na frente. Ele cobrirá a frente e a traseira quando se tornar Full AOE.</li>
+                                    <li><strong>Auto-Upgrade:</strong> Ative o upgrade automático primeiro na Toy Maker até ao máximo e em seguida no Kenpachi (Zaraki). Depois disso, pode deixar a partida em modo semiautomático.</li>
+                                </ul>
+                            </li>
+
+                            <li><strong>4. Chefe Final & Garantia do Farm (Extraction):</strong>
+                                <ul>
+                                    <li>O Boss final possui bastante vida e escudo (ex: 32.8k+ HP). Mesmo que a carruagem perca um pouco de HP durante o confronto, **você não perderá a partida**.</li>
+                                    <li>Assim que derrotar o chefe e a fase terminar, escolha sempre a opção <strong>EXTRACT (Extrair)</strong>. Isso garante 100% das moedas e materiais no seu inventário de forma segura sem correr riscos de perder os recursos tentando continuar.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="gm-detail-story" class="gm-detail-box">
+                    <div class="gm-detail-title">📘 Modo Story</div>
+                    <p>A campanha principal dividida por capítulos baseados em universos de animes. É o modo ideal para novatos ganharem as primeiras Gemas e liberarem o acesso ao restante do jogo.</p>
+                </div>
+
+                <div id="gm-detail-raid" class="gm-detail-box">
+                    <div class="gm-detail-title">🔥 Modo Raid</div>
+                    <p>Desafios intensos focados em combates contra chefes gigantescos com hordas de alta densidade. Recompensa com materiais raros para evolução e unidades míticas.</p>
+                </div>
+
+                <div id="gm-detail-challenge" class="gm-detail-box">
+                    <div class="gm-detail-title">⚡ Modo Challenge</div>
+                    <p>Partidas diárias com modificadores de combate sorteados (ex: escudos reforçados, inimigos mais rápidos, custo de invocação elevado). Ótima fonte de recursos extras.</p>
+                </div>
+
+                <div id="gm-detail-tournament" class="gm-detail-box">
+                    <div class="gm-detail-title">🏆 Modo Tournament</div>
+                    <p>Competição em salas onde os jogadores enfrentam ondas infinitas de inimigos. Excelente modo para obter unidades exclusivas de evento como a <strong>Toy Maker</strong>.</p>
+                </div>
+
+                <div id="gm-detail-global" class="gm-detail-box">
+                    <div class="gm-detail-title">🌍 Modo Global Tournament</div>
+                    <p>O ranking mundial (Leaderboard) de mais alto nível. Reservado para os melhores times do jogo disputando títulos lendários e recompensas no topo da tabela.</p>
+                </div>
+
+                <div id="gm-detail-sandbox" class="gm-detail-box">
+                    <div class="gm-detail-title">🧪 Modo Sandbox</div>
+                    <p>Modo de testes com dinheiro infinito. Ideal para experimentar novas composições de unidades, testar o dano por segundo (DPS) e validar sinergias antes de ir para os modos reais.</p>
+                </div>
+
+            </div>
+
+            <div id="units-page" class="page-view">
+                <h1 class="wiki-title">🛡️ Unidades e Evoluções (Evolve & Crafting)</h1>
+                <div class="intro-quote">
+                    As unidades são os guerreiros que invocaste para defender o trajeto. Cada unidade possui um caminho de evolução que desbloqueia novas formas, habilidades ativas e o 3º slot de equipamento exclusivo.
+                </div>
+                <h2>Principais Receitas de Evolução</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-card-title">Shadow ➔ Divine</div>
+                        <p><strong>Requisitos:</strong> 20x Sprites Azuis, 20x Verdes, 20x Vermelhos, 3x Rainbow Sprites, 10,000 Gold.</p>
+                        <p><strong>Passiva:</strong> <em>Divine Spirit</em> - Aplica atordoamento (Stun) em área.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-title">Crimson ➔ Brother</div>
+                        <p><strong>Requisitos:</strong> 20x Sprites Vermelhos, 20x Rosas, 1x Rainbow Sprite, 5,000 Gold.</p>
+                        <p><strong>Passiva:</strong> <em>Piercing Crimson</em> - Aumenta a penetração de armadura e Sangramento.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-title">True Saint ➔ Holy</div>
+                        <p><strong>Requisitos:</strong> 1x Holy Pendant, 5x Sprites de cada cor, 1x Rainbow Sprite, 5,000 Gold.</p>
+                        <p><strong>Passiva:</strong> <em>Seize</em> - Transfere 20% do dano de até 3 aliados próximos para si.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="elements-page" class="page-view">
+                <h1 class="wiki-title">⚙️ Sistema de Elementos</h1>
+                <div class="intro-quote">
+                    Os elementos determinam multiplicadores de dano e reações contra inimigos específicos.
+                </div>
                 <table>
                     <thead>
-                        <tr>
-                            <th>Categoria da Unidade</th>
-                            <th>Trait Ideal</th>
-                            <th>Efeito em Partida</th>
-                        </tr>
+                        <tr><th>Ícone</th><th>Elemento</th><th>Efeito / Descrição</th></tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><strong>Meta DPS / Overall</strong></td>
-                            <td>Godspeed / Monarch</td>
-                            <td>+100% Dano, redução no tempo de ataque (SPA) e permite +1 cópia.</td>
-                        </tr>
-                        <tr>
-                            <td><strong>DPS</strong></td>
-                            <td>Overpower / Grandmaster</td>
-                            <td>+50% Dano crítico e maior alcance.</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Meta Suportes / Suportes</strong></td>
-                            <td>Range Master / Swiftness</td>
-                            <td>Aumenta o alcance da aura de suporte e acelera a aplicação de debuffs.</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Farms</strong></td>
-                            <td>Fortune / Entrepreneur</td>
-                            <td>Aumenta a quantidade de ouro gerada ao final de cada wave.</td>
-                        </tr>
+                        <tr><td>🔥</td><td><strong>Flame (Fogo)</strong></td><td>Causa dano contínuo de Queimadura (Burn DoT). Extra contra inimigos de Terra.</td></tr>
+                        <tr><td>💧</td><td><strong>Hydro (Água)</strong></td><td>Aplica efeito molhado e amplifica ataques elétricos. Extra contra Fogo.</td></tr>
+                        <tr><td>⚡</td><td><strong>Storm (Trovão)</strong></td><td>Aplica micro-stuns e dano em cadeia em grupos de inimigos.</td></tr>
+                        <tr><td>💨</td><td><strong>Gale (Vento)</strong></td><td>Aumenta a velocidade de ataque (SPA) e o alcance das unidades próximas.</td></tr>
+                        <tr><td>🪨</td><td><strong>Terra (Terra)</strong></td><td>Alta quebra de escudos e resiliência contra modificadores.</td></tr>
+                        <tr><td>✨</td><td><strong>Light (Luz)</strong></td><td>Causa dano purificador extra contra inimigos do tipo Dark/Demon.</td></tr>
+                        <tr><td>🌑</td><td><strong>Dark (Escuridão)</strong></td><td>Aplica amplificação de dano cumulativa nos alvos atingidos.</td></tr>
+                        <tr><td>⚔️</td><td><strong>Neutral (Neutro)</strong></td><td>Dano padrão sem bônus ou penalidades elementais.</td></tr>
+                        <tr><td>🌾</td><td><strong>Farm (Economia)</strong></td><td>Exclusivo para unidades que geram Yen a cada onda.</td></tr>
                     </tbody>
                 </table>
-            </section>
+            </div>
 
-            <section id="guia-progresso">
-                <h2>📘 4. Guia Rápido de Progressão</h2>
-                <div class="guide-step">
-                    <h3>1. Começando a Partida (Wave 1 a 5)</h3>
-                    <p>Posicione primeiro uma unidade da categoria <span class="badge-farms">Farms</span> para garantir rendimento de ouro. Coloque uma unidade simples de dano próximo à entrada para não perder vida.</p>
+            <div id="archetypes-page" class="page-view">
+                <h1 class="wiki-title">🔱 Arquétipos de Combate</h1>
+                <div class="intro-quote">
+                    O arquétipo determina o tipo de alvo que a unidade consegue atacar e que tipo de suporte recebe.
                 </div>
-                <div class="guide-step">
-                    <h3>2. Meio de Jogo (Wave 6 a 20)</h3>
-                    <p>Suba o nível das suas unidades de <span class="badge-metasuporte">Meta Suportes</span> para desacelerar inimigos e posicione seus <span class="badge-dps">DPS</span> principais nas curvas do mapa.</p>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-card-title">⚔️ Physical (Físico)</div>
+                        <p>Ataques corporais e projéteis corporais. Recebem bônus de suportes focados em dano físico e crítico.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-title">🔮 Magical (Mágico)</div>
+                        <p>Magias de área, conjurações e maldições. Bônus de amplificação elemental e redução de cooldown.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-title">🧠 Psychic (Psíquico)</div>
+                        <p>Adicionado na atualização v0.0. Neutro contra debuffs de mapa, ignorando imunidades básicas de inimigos.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-title">🦅 Air / Ground / Hybrid</div>
+                        <p>Determina se a unidade ataca alvos terrestres (Ground), aéreos (Air) ou ambos (Hybrid).</p>
+                    </div>
                 </div>
-                <div class="guide-step">
-                    <h3>3. Final de Jogo (Boss Waves)</h3>
-                    <p>Maximize suas unidades <span class="badge-overall">Overall</span> e <span class="badge-metadps">Meta DPS</span>. Use o ouro extra gerado pelos Farms para aplicar o nível máximo de upgrades em todo o time.</p>
-                </div>
-            </section>
+            </div>
 
-            <section id="codigos">
-                <h2>🎁 5. Códigos Ativos</h2>
-                <div class="code-box">
-                    • <strong>RELEASE</strong> - 500 Gemas + 5 Giros<br>
-                    • <strong>EXPEDITIONS2026</strong> - Poção de XP Duplo (1h)<br>
-                    • <strong>UPDATE_SHADOW</strong> - 3x Tokens de Trait Reroll<br>
-                    • <strong>UNBOUND_BUFF</strong> - 1.500 Gemas<br>
-                    • <strong>FREESPIN50</strong> - 50 Giros Grátis
+            <div id="traits-page" class="page-view">
+                <h1 class="wiki-title">⚙️ Passivas e Traits</h1>
+                <div class="intro-quote">
+                    Podes rolar Traits na Lobby com Trait Crystals para melhorar significativamente os atributos das tuas unidades.
                 </div>
-            </section>
+                <table>
+                    <thead>
+                        <tr><th>Trait</th><th>Raridade</th><th>Efeitos de Jogo</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Unbound / Monarch</strong></td><td>Mythic (0.1%)</td><td>+350% Dano, -15% SPA, +1 Cópia limite em campo.</td></tr>
+                        <tr><td><strong>Godspeed</strong></td><td>Mythic (0.2%)</td><td>+100% Dano, -30% SPA, +25% Alcance.</td></tr>
+                        <tr><td><strong>Overpower</strong></td><td>Legendary (1%)</td><td>+50% Dano Crítico e +20% Alcance.</td></tr>
+                        <tr><td><strong>Investor / Fortune</strong></td><td>Rare (2%)</td><td>+25% a +50% de geração de Yen por onda.</td></tr>
+                        <tr><td><strong>Optics</strong></td><td>Common (3%)</td><td>+25% de Alcance (Range).</td></tr>
+                        <tr><td><strong>Bolt</strong></td><td>Common (4%)</td><td>-15% de Tempo de Ataque (SPA).</td></tr>
+                    </tbody>
+                </table>
+            </div>
 
-            <section id="modos">
-                <h2>🗺️ 6. Modos de Jogo</h2>
+            <div id="effects-page" class="page-view">
+                <h1 class="wiki-title">👁️ Efeitos de Status (Status & DoT)</h1>
+                <div class="intro-quote">
+                    Efeitos negativos aplicados nos inimigos que causam dano contínuo ou controlo de grupo.
+                </div>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-card-title">🩸 Bleed (Sangramento)</div>
+                        <p>Causa 0.65x do dano em 6 ticks ao longo de 6s. Baseado na vida máxima do inimigo.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-title">🔥 Burn (Queimadura)</div>
+                        <p>Causa 0.5x do dano em 4 ticks ao longo de 4s. Reduz a regeneração de vida do inimigo.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-title">🕯️ Austere Flames</div>
+                        <p>Dano de fogo sagrado elevado (0.75x do dano em 4s).</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-title">⚡ Stun & Freeze</div>
+                        <p>Paralisa completamente o movimento do inimigo por 2 a 3 segundos.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="enemies-page" class="page-view">
+                <h1 class="wiki-title">👾 Inimigos (Enemies)</h1>
+                <div class="intro-quote">
+                    Inimigos e bosses que avançam pelo caminho. Requerem sinergia elemental para serem derrotados.
+                </div>
+                <p>Os inimigos variam entre <strong>Normal, Speedy, Tank, Flying e Bosses</strong>. Fases mais avançadas introduzem inimigos com escudos elementais que só recebem dano de elementos específicos.</p>
+            </div>
+
+            <div id="modifiers-page" class="page-view">
+                <h1 class="wiki-title">🔨 Modificadores de Desafio</h1>
+                <div class="intro-quote">
+                    Efeitos especiais aplicados aos inimigos nos modos Challenge e Expeditions.
+                </div>
+                <table>
+                    <thead>
+                        <tr><th>Modificador</th><th>Efeito</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>🏃 Sprinter</td><td>+45% de Velocidade de Movimento, -20% de HP.</td></tr>
+                        <tr><td>🛡️ Tank</td><td>+20% de HP, -20% de Velocidade.</td></tr>
+                        <tr><td>👾 Summoner</td><td>Invoca até 5 lacaios a cada 5 segundos.</td></tr>
+                        <tr><td>💥 Explosive</td><td>Explode ao morrer, aplicando Stun em unidades num raio de 10 de alcance.</td></tr>
+                        <tr><td>✂️ Splitter</td><td>Divide-se em 3 inimigos menores com 33% de HP ao ser derrotado.</td></tr>
+                        <tr><td>🛡️ Armored</td><td>Reduz o dano recebido de ataques Full AoE em 33%.</td></tr>
+                        <tr><td>💖 Regen I-IV</td><td>Regenera de 1% a 8% do HP máximo por segundo.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="equipment-page" class="page-view">
+                <h1 class="wiki-title">⚔️ Equipamentos (Equipment)</h1>
+                <div class="intro-quote">
+                    Itens equipáveis nas unidades para conceder atributos extra e habilidades passivas.
+                </div>
+                <h2>Equipamentos Standard</h2>
+                <p>Pode equipar até 2 itens genéricos em qualquer unidade: <em>Katana (+DMG), Magic Orb (+Range), Bamboo Bottle (+Yen), Raid Cape (+HP/Shield), Warrior's Axe, Soul Splitter</em>.</p>
+                
+                <h2>Equipamentos Exclusivos de Unidade</h2>
+                <p>Desbloqueados no 3º slot ao evoluir a unidade para a forma máxima: <em>Hexed Blade, Hair Bells, Elven Battle Staff, Calamity's Eye, Emperor's Attire</em>.</p>
+            </div>
+
+            <div id="items-page" class="page-view">
+                <h1 class="wiki-title">🎒 Itens e Materiais de Crafting</h1>
+                <div class="intro-quote">
+                    Recursos necessários para evolução e criação de itens na fábrica.
+                </div>
+                <h2>Lista de Sprites & Materiais</h2>
                 <ul>
-                    <li><strong>Modo História:</strong> Avance capítulos para desbloquear novos mundos e boss raids.</li>
-                    <li><strong>Modo Infinito:</strong> Desafio sem fim para testar seus Meta DPS no placar global.</li>
-                    <li><strong>Torre dos Desafios:</strong> 50 andares com recompensas exclusivas.</li>
+                    <li><strong>Sprites:</strong> Grey, Blue, Green, Pink, Purple, Red, Yellow e Rainbow Sprites.</li>
+                    <li><strong>Especiais de Unidade:</strong> Hollowed Visor, 8th's Sword, Giant Hammer, Puppet Heart, Holy Pendant, Salmon, Burning Fruit, Student ID, Elixir of Life.</li>
+                    <li><strong>Recursos de Mapa:</strong> Cursed Timber, Lush Dirt, Aqua Shard, Equipment Scrap, Fuel Cell, Geode.</li>
                 </ul>
-            </section>
+            </div>
+
+            <div id="events-page" class="page-view">
+                <h1 class="wiki-title">🏆 Eventos Temporários</h1>
+                <div class="intro-quote">
+                    Eventos sazonais com banners exclusivos, unidades Secret limitadas e recompensas especiais.
+                </div>
+                <p>Durante os eventos, os jogadores podem acumular moedas de evento ao completar o Modo História e Expedições para trocar por unidades exclusivas na Event Shop.</p>
+            </div>
+
+            <div id="battlepass-page" class="page-view">
+                <h1 class="wiki-title">🎟️ Passe de Batalha (Battlepass)</h1>
+                <div class="intro-quote">
+                    Sistema de missões diárias e semanais para ganhar níveis e desbloquear recompensas.
+                </div>
+                <p>O Passe inclui uma pista gratuita e uma pista Premium (VIP), oferecendo <strong>Gems, Trait Crystals, Exclusive Skins, Equipment Locks e Unidades Exclusivas</strong> ao atingir o nível máximo.</p>
+            </div>
+
+            <div id="store-page" class="page-view">
+                <h1 class="wiki-title">🛒 Loja Premium (Store)</h1>
+                <div class="intro-quote">
+                    Compras com Robux e pacotes de recursos.
+                </div>
+                <ul>
+                    <li><strong>Gamepasses:</strong> VIP Status, Fast Forward (2x Speed), Extra Unit Slots, Auto-Sell.</li>
+                    <li><strong>Recursos:</strong> Pacotes de Gems, Trait Crystals e Boosts de XP/Yen por tempo limitado.</li>
+                </ul>
+            </div>
+
+            <div id="shops-page" class="page-view">
+                <h1 class="wiki-title">🏬 Lojas do Jogo (Shops)</h1>
+                <div class="intro-quote">
+                    Lojas específicas espalhadas pelos modos de jogo.
+                </div>
+                <h2>Checkpoint Shop (Modo Expeditions)</h2>
+                <ul>
+                    <li><strong>Repair Hammer:</strong> Restaura 750 de HP da carga (Payload) em perigo.</li>
+                    <li><strong>Anvils:</strong> Concede upgrades permanentes de Dano, SPA ou Range para as tuas unidades durante a expedição.</li>
+                    <li><strong>Tomes:</strong> Traits temporárias atribuídas às unidades na partida.</li>
+                </ul>
+            </div>
+
         </main>
 
         <aside class="infobox">
             <div class="infobox-title">Anime Expeditions</div>
-            <div class="infobox-image">
-                <img src="https://tr.rbxcdn.com/180DAY-218ebf9b3ddbf8ff7bc3f2e1dfa92ed5/768/432/Image/Webp/noFilter" alt="Anime Expeditions Banner" style="width:100%; height:100%; object-fit:cover;">
-            </div>
-            <table class="infobox-data">
-                <tr>
-                    <td>Plataforma:</td>
-                    <td>Roblox</td>
-                </tr>
-                <tr>
-                    <td>Gênero:</td>
-                    <td>Tower Defense / RPG</td>
-                </tr>
-                <tr>
-                    <td>Desenvolvedor:</td>
-                    <td>Expeditions Entertainment</td>
-                </tr>
-                <tr>
-                    <td>Universo:</td>
-                    <td>Multi-Anime</td>
-                </tr>
-                <tr>
-                    <td>Status:</td>
-                    <td>Ativo / Lançado</td>
-                </tr>
-                <tr>
-                    <td>Servidor:</td>
-                    <td>VIP / Privado</td>
-                </tr>
-            </table>
-            <a href="https://www.roblox.com/share?code=b85adf4ea1bf934c992f67c3b019f4d0&type=Server" target="_blank" class="play-btn">🔒 Entrar no Servidor VIP</a>
-        </aside>
+            
+            <img src="https://tr.rbxcdn.com/180DAY-be2bfc19a28eac0eafb5dec7515ffe45/768/432/Image/Webp/noFilter" alt="Anime Expeditions Banner" class="infobox-banner">
 
+            <table class="infobox-data">
+                <tr><td>Plataforma:</td><td>Roblox</td></tr>
+                <tr><td>Gênero:</td><td>Tower Defense / RPG</td></tr>
+                <tr><td>Desenvolvedor:</td><td>Expeditions Entertainment</td></tr>
+                <tr><td>Universo:</td><td>Multi-Anime</td></tr>
+                <tr><td>Status:</td><td>Ativo / Lançado</td></tr>
+                <tr><td>Servidor:</td><td>VIP / Privado</td></tr>
+            </table>
+
+            <a href="https://www.roblox.com/share?code=3104b79a6de5ce44a18504cdecc68c5f&type=Server" class="play-btn">🔒 Entrar no Servidor VIP</a>
+        </aside>
     </div>
 
+    <script>
+        function switchPage(pageId, btnElement) {
+            const pages = document.querySelectorAll('.page-view');
+            pages.forEach(page => page.classList.remove('active'));
+
+            const buttons = document.querySelectorAll('.tab-btn, .sub-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+
+            if (btnElement) {
+                btnElement.classList.add('active');
+            }
+        }
+
+        function openGamemodeDetail(detailId) {
+            const boxes = document.querySelectorAll('.gm-detail-box');
+            boxes.forEach(box => box.classList.remove('active'));
+
+            const targetBox = document.getElementById(detailId);
+            if (targetBox) {
+                targetBox.classList.add('active');
+                targetBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        function copyCode(text, btnElement) {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = btnElement.innerText;
+                btnElement.innerText = "Copiado!";
+                btnElement.style.background = "#00e676";
+                btnElement.style.borderColor = "#66ffa6";
+                
+                setTimeout(() => {
+                    btnElement.innerText = originalText;
+                    btnElement.style.background = "linear-gradient(180deg, #00d2ff 0%, #0088cc 100%)";
+                    btnElement.style.borderColor = "#55e0ff";
+                }, 1500);
+            }).catch(err => {
+                console.error('Erro ao copiar código: ', err);
+            });
+        }
+    </script>
 </body>
 </html>
