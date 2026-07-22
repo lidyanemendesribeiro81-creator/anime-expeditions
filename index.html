@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Expeditions Wiki | Dark Edition & Guia de Evoluções</title>
+    <style>
+        :root {
+            --bg-color: #000000;
+            --main-bg: #0a0a0c;
+            --card-bg: #111114;
+            --accent-color: #ff2a2a;
+            --accent-hover: #cc0000;
+            --text-main: #ffffff;
+            --text-sub: #cccccc;
+            --border-color: #1a1a20;
+            --infobox-bg: #08080a;
+            
+            /* Cores dos Tiers da Imagem */
+            --tier-overall: #ff77e9;
+            --tier-metadps: #ff4a4a;
+            --tier-dps: #ffb84d;
+            --tier-metasuporte: #4de6ff;
+            --tier-suporte: #4d88ff;
+            --tier-farms: #ffff4d;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        .navbar {
+            background-color: #000000;
+            border-bottom: 2px solid var(--accent-color);
+            padding: 12px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar .logo {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .navbar .logo span {
+            color: var(--accent-color);
+        }
+
+        .search-bar input {
+            background: #111115;
+            border: 1px solid var(--border-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            color: #fff;
+            outline: none;
+            width: 250px;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 30px;
+        }
+
+        .main-content {
+            background-color: var(--main-bg);
+            padding: 35px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        h1.wiki-title {
+            font-size: 2.4rem;
+            color: #fff;
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .intro-quote {
+            background: #111116;
+            border-left: 4px solid var(--accent-color);
+            padding: 18px 22px;
+            margin-bottom: 25px;
+            border-radius: 0 8px 8px 0;
+            font-size: 1.05rem;
+        }
+
+        .toc {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 20px 25px;
+            border-radius: 8px;
+            margin-bottom: 35px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .toc h3 {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            color: var(--accent-color);
+        }
+
+        .toc ul {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 8px;
+            list-style: none;
+        }
+
+        .toc a {
+            color: #ff4d4d;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            color: #fff;
+            margin-top: 40px;
+            margin-bottom: 18px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            color: #ffffff;
+            margin-top: 22px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: var(--text-sub);
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+            color: var(--text-sub);
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0 30px 0;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.95rem;
+        }
+
+        th {
+            background-color: #18181f;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #16161d;
+        }
+
+        /* Encartes de Tiers */
+        .badge-overall { background: var(--tier-overall); color: #000; font-weight: bold; padding: 5px 12px; border-radius: 4px; display: inline-block; font-style: italic; }
+        .badge-metadps { background: var(--tier-metadps); color: #fff; font-weight: bold; padding: 5px 12px; border-radius: 4px; display: inline-block; font-style: italic; }
+        .badge-dps { background: var(--tier-dps); color: #000; font-weight: bold; padding: 5px 12px; border-radius: 4px; display: inline-block; font-style: italic; }
+        .badge-metasuporte { background: var(--tier-metasuporte); color: #000; font-weight: bold; padding: 5px 12px; border-radius: 4px; display: inline-block; font-style: italic; }
+        .badge-suporte { background: var(--tier-suporte); color: #fff; font-weight: bold; padding: 5px 12px; border-radius: 4px; display: inline-block; font-style: italic; }
+        .badge-farms { background: var(--tier-farms); color: #000; font-weight: bold; padding: 5px 12px; border-radius: 4px; display: inline-block; font-style: italic; }
+
+        /* Estilização Personalizada para as Evoluções */
+        .evolve-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            margin: 20px 0 30px 0;
+        }
+
+        .evolve-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .evolve-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .evolve-title {
+            font-size: 1.15rem;
+            font-weight: bold;
+            color: #ffffff;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .evolve-title span {
+            color: var(--accent-color);
+            font-size: 0.95rem;
+        }
+
+        .evolve-reqs {
+            background: #08080a;
+            border-radius: 6px;
+            padding: 10px 12px;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+            color: #bbbbbb;
+            border-left: 3px solid #ffb84d;
+        }
+
+        .evolve-reqs strong {
+            color: #ffffff;
+        }
+
+        .evolve-skills {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+        }
+
+        .evolve-skills strong {
+            color: #4de6ff;
+        }
+
+        .infobox {
+            background-color: var(--infobox-bg);
+            border: 2px solid var(--accent-color);
+            border-radius: 10px;
+            padding: 20px;
+            align-self: start;
+        }
+
+        .infobox-title {
+            text-align: center;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #fff;
+            background: var(--accent-color);
+            padding: 8px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .infobox-image {
+            width: 100%;
+            height: 190px;
+            background: #111;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+        }
+
+        .infobox-data {
+            width: 100%;
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+        .infobox-data tr td:first-child {
+            font-weight: bold;
+            color: var(--text-sub);
+            width: 45%;
+        }
+
+        .play-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background-color: var(--accent-color);
+            color: #fff;
+            padding: 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: 0.2s;
+        }
+
+        .play-btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .guide-step {
+            background-color: #121217;
+            border-left: 4px solid var(--accent-color);
+            padding: 18px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .code-box {
+            background-color: #050507;
+            border: 1px dashed var(--accent-color);
+            padding: 18px;
+            border-radius: 6px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 960px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="#" class="logo">⛩️ Anime <span>Expeditions</span> Wiki</a>
+        <div class="search-bar">
+            <input type="text" placeholder="Pesquisar na Wiki...">
+        </div>
+    </nav>
+
+    <div class="container">
+        
+        <main class="main-content">
+            <h1 class="wiki-title">Anime Expeditions: Guia Mestre & Enciclopédia</h1>
+
+            <div class="intro-quote">
+                Bem-vindo à Wiki oficial! Confira abaixo o guia completo de **Evoluções de Personagens**, a **Tier List oficial por funções** e todas as dicas para dominar o jogo.
+            </div>
+
+            <div class="toc">
+                <h3>📜 Índice de Conteúdo</h3>
+                <ul>
+                    <li><a href="#evolucoes">1. Guia Oficial de Evoluções (Craft)</a></li>
+                    <li><a href="#tier-list">2. Tier List por Função</a></li>
+                    <li><a href="#traits-guia">3. Traits Recomendadas</a></li>
+                    <li><a href="#guia-progresso">4. Guia de Progressão</a></li>
+                    <li><a href="#codigos">5. Códigos Ativos</a></li>
+                    <li><a href="#modos">6. Modos de Jogo</a></li>
+                </ul>
+            </div>
+
+            <section id="evolucoes">
+                <h2>🧬 1. Guia Oficial de Evoluções (Evolve / Crafting)</h2>
+                <p>Confira abaixo todos os materiais, requisitos e novas habilidades desbloqueadas ao evoluir suas unidades:</p>
+
+                <div class="evolve-grid">
+                    <div class="evolve-card">
+                        <div class="evolve-title">Shadow <span>➔ Shadow (Divine)</span></div>
+                        <div class="evolve-reqs">
+                            <strong>Requisitos:</strong> 20x Sprites Azuis, 20x Verdes, 20x Vermelhos, 3x Rainbow e 10.000 Ouro.
+                        </div>
+                        <div class="evolve-skills">
+                            <strong>Habilidade Desbloqueada:</strong> <em>Divine Spirit</em> — Invoca um espírito que atordoa os inimigos e causa dano igual ao da própria unidade.
+                        </div>
+                    </div>
+
+                    <div class="evolve-card">
+                        <div class="evolve-title">Crimson <span>➔ Crimson (Brother)</span></div>
+                        <div class="evolve-reqs">
+                            <strong>Requisitos:</strong> 20x Sprites Vermelhos, 20x Rosas, 1x Rainbow e 5.000 Ouro.
+                        </div>
+                        <div class="evolve-skills">
+                            <strong>Habilidade Desbloqueada:</strong> <em>Piercing Crimson</em> — Ataque perfurante contínuo que aplica marcas nos inimigos atingidos.
+                        </div>
+                    </div>
+
+                    <div class="evolve-card">
+                        <div class="evolve-title">True Saint <span>➔ True Saint (Holy)</span></div>
+                        <div class="evolve-reqs">
+                            <strong>Requisitos:</strong> 1x Holy Pendant, 5 Sprites de cada cor (Vermelho, Azul, Verde, Roxo, Amarelo, Rosa), 1x Rainbow e 5.000 Ouro.
+                        </div>
+                        <div class="evolve-skills">
+                            <strong>Habilidade Desbloqueada:</strong> <em>Seize</em> — Rouba 20% do dano base dos três aliados mais fortes em campo.
+                        </div>
+                    </div>
+
+                    <div class="evolve-card">
+                        <div class="evolve-title">Cursed Student <span>➔ True Love</span></div>
+                        <div class="evolve-reqs">
+                            <strong>Requisitos:</strong> 1x Student ID, 20x Sprites Azuis, 20x Roxos, 1x Rainbow e 5.000 Ouro.
+                        </div>
+                        <div class="evolve-skills">
+                            <strong>Habilidades Desbloqueadas:</strong> <em>Cursed Mimicry</em> (Ataques de seguimento) e <em>Spirit Bats</em> (Invoca morcegos com efeito de sangramento).
+                        </div>
+                    </div>
+
+                    <div class="evolve-card">
+                        <div class="evolve-title">Salmon Sorcerer <span>➔ Grade 1</span></div>
+                        <div class="evolve-reqs">
+                            <strong>Requisitos:</strong> 1x Salmon, 20x Sprites Verdes, 20x Azuis, 1x Rainbow e 5.000 Ouro.
+                        </div>
+                        <div class="evolve-skills">
+                            <strong>Habilidades Desbloqueadas:</strong> <em>Crumble Away</em> (Reduz velocidade dos alvos) e <em>Plummet</em> (Atordoa inimigos próximos).
+                        </div>
+                    </div>
+
+                    <div class="evolve-card">
+                        <div class="evolve-title">Flame Emperor <span>➔ Reincarnate</span></div>
+                        <div class="evolve-reqs">
+                            <strong>Requisitos:</strong> 1x Burning Fruit, 20x Sprites Vermelhos, 20x Amarelos, 1x Rainbow e 5.000 Ouro.
+                        </div>
+                        <div class="evolve-skills">
+                            <strong>Habilidade Desbloqueada:</strong> <em>Wall of Fire</em> — Cria uma barreira de fogo permanente que causa efeito de queimadura.
+                        </div>
+                    </div>
+
+                    <div class="evolve-card">
+                        <div class="evolve-title">Puppet <span>➔ Puppet (Telekinetic)</span></div>
+                        <div class="evolve-reqs">
+                            <strong>Requisitos:</strong> 1x Puppet Heart, 20x Sprites Rosas, 20x Roxos, 1x Rainbow e 5.000 Ouro.
+                        </div>
+                        <div class="evolve-skills">
+                            <strong>Habilidade Desbloqueada:</strong> <em>Complete Control</em> — Empurra todos os inimigos afetados para trás por 2 segundos.
+                        </div>
+                    </div>
+
+                    <div class="evolve-card">
+                        <div class="evolve-title">Elf Mage <span>➔ Elf Mage (Unleashed)</span></div>
+                        <div class="evolve-reqs">
+                            <strong>Requisitos:</strong> 1x Cosmic Magic, 20x Sprites Azuis, 20x Roxos, 1x Rainbow e 5.000 Ouro.
+                        </div>
+                        <div class="evolve-skills">
+                            <strong>Habilidades Desbloqueadas:</strong> <em>Arcane Magic</em> e <em>Arcane Spells</em> (Permite utilizar Old Magic, Eruption e Storm).
+                        </div>
+                    </div>
+
+                    <div class="evolve-card">
+                        <div class="evolve-title">String Demon <span>➔ Awakened</span></div>
+                        <div class="evolve-reqs">
+                            <strong>Requisitos:</strong> 1x Joker of the Nonsensical Pirates, 20x Sprites Amarelos, 20x Rosas, 1x Rainbow e 5.000 Ouro.
+                        </div>
+                        <div class="evolve-skills">
+                            <strong>Habilidade Desbloqueada:</strong> <em>String Sync</em> — Realiza ataques de seguimento automáticos sempre que um aliado próximo ataca.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tier-list">
+                <h2>🏆 2. Tier List Oficial por Função</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Categoria</th>
+                            <th>Personagens Inclusos</th>
+                            <th>Função / Utilidade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="badge-overall">Overall</span></td>
+                            <td>Kage, Kenpachi, Pink Witch, Curse Boy (Yuta), White Devil, Flame Emperor (Sabo), Demon Girl, Masked Brawler</td>
+                            <td><strong>Melhores do Jogo:</strong> Dominam tanto em dano quanto em utilidade.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge-metadps">Meta Dps</span></td>
+                            <td>Kage, Kenpachi, White Devil, Curse Boy (Yuta), Pink Witch, Demon Girl</td>
+                            <td><strong>Dano Máximo Supremo:</strong> Maior DPS contra chefes e hordas pesadas.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge-dps">Dps</span></td>
+                            <td>Nekomata, Golden Armor, Hollow Reaper (Ichigo), Blood Brother (Choso), Flame Emperor (Sabo), Knight Chevalier</td>
+                            <td><strong>Dano Constante:</strong> Excelentes para limpeza e controle de rotas.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge-metasuporte">Meta Suportes</span></td>
+                            <td>Masked Brawler, Kage, Ice Mage, Miko</td>
+                            <td><strong>Suportes Essenciais:</strong> Aplicam debuffs, desaceleração massiva (Slow) ou amplificação de dano.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge-suporte">Suportes</span></td>
+                            <td>Red Glasses Boss, Shadow Beast, Rukia</td>
+                            <td><strong>Utilitários:</strong> Auxiliam com atordoamentos (Stuns) e empurrões (Knockback).</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge-farms">Farms</span></td>
+                            <td>Green Doctor, Leorio/Cook</td>
+                            <td><strong>Economia:</strong> Geradores de dinheiro essenciais nas primeiras ondas.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="traits-guia">
+                <h2>✨ 3. Passivas e Traits Recomendadas</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Categoria da Unidade</th>
+                            <th>Trait Ideal</th>
+                            <th>Efeito em Partida</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Meta DPS / Overall</strong></td>
+                            <td>Godspeed / Monarch</td>
+                            <td>+100% Dano, redução no tempo de ataque (SPA) e permite +1 cópia.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>DPS</strong></td>
+                            <td>Overpower / Grandmaster</td>
+                            <td>+50% Dano crítico e maior alcance.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Meta Suportes / Suportes</strong></td>
+                            <td>Range Master / Swiftness</td>
+                            <td>Aumenta o alcance da aura de suporte e acelera a aplicação de debuffs.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Farms</strong></td>
+                            <td>Fortune / Entrepreneur</td>
+                            <td>Aumenta a quantidade de ouro gerada ao final de cada wave.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="guia-progresso">
+                <h2>📘 4. Guia Rápido de Progressão</h2>
+                <div class="guide-step">
+                    <h3>1. Começando a Partida (Wave 1 a 5)</h3>
+                    <p>Posicione primeiro uma unidade da categoria <span class="badge-farms">Farms</span> para garantir rendimento de ouro. Coloque uma unidade simples de dano próximo à entrada para não perder vida.</p>
+                </div>
+                <div class="guide-step">
+                    <h3>2. Meio de Jogo (Wave 6 a 20)</h3>
+                    <p>Suba o nível das suas unidades de <span class="badge-metasuporte">Meta Suportes</span> para desacelerar inimigos e posicione seus <span class="badge-dps">DPS</span> principais nas curvas do mapa.</p>
+                </div>
+                <div class="guide-step">
+                    <h3>3. Final de Jogo (Boss Waves)</h3>
+                    <p>Maximize suas unidades <span class="badge-overall">Overall</span> e <span class="badge-metadps">Meta DPS</span>. Use o ouro extra gerado pelos Farms para aplicar o nível máximo de upgrades em todo o time.</p>
+                </div>
+            </section>
+
+            <section id="codigos">
+                <h2>🎁 5. Códigos Ativos</h2>
+                <div class="code-box">
+                    • <strong>RELEASE</strong> - 500 Gemas + 5 Giros<br>
+                    • <strong>EXPEDITIONS2026</strong> - Poção de XP Duplo (1h)<br>
+                    • <strong>UPDATE_SHADOW</strong> - 3x Tokens de Trait Reroll<br>
+                    • <strong>UNBOUND_BUFF</strong> - 1.500 Gemas<br>
+                    • <strong>FREESPIN50</strong> - 50 Giros Grátis
+                </div>
+            </section>
+
+            <section id="modos">
+                <h2>🗺️ 6. Modos de Jogo</h2>
+                <ul>
+                    <li><strong>Modo História:</strong> Avance capítulos para desbloquear novos mundos e boss raids.</li>
+                    <li><strong>Modo Infinito:</strong> Desafio sem fim para testar seus Meta DPS no placar global.</li>
+                    <li><strong>Torre dos Desafios:</strong> 50 andares com recompensas exclusivas.</li>
+                </ul>
+            </section>
+        </main>
+
+        <aside class="infobox">
+            <div class="infobox-title">Anime Expeditions</div>
+            <div class="infobox-image">
+                <img src="https://tr.rbxcdn.com/180DAY-218ebf9b3ddbf8ff7bc3f2e1dfa92ed5/768/432/Image/Webp/noFilter" alt="Anime Expeditions Banner" style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <table class="infobox-data">
+                <tr>
+                    <td>Plataforma:</td>
+                    <td>Roblox</td>
+                </tr>
+                <tr>
+                    <td>Gênero:</td>
+                    <td>Tower Defense / RPG</td>
+                </tr>
+                <tr>
+                    <td>Desenvolvedor:</td>
+                    <td>Expeditions Entertainment</td>
+                </tr>
+                <tr>
+                    <td>Universo:</td>
+                    <td>Multi-Anime</td>
+                </tr>
+                <tr>
+                    <td>Status:</td>
+                    <td>Ativo / Lançado</td>
+                </tr>
+                <tr>
+                    <td>Servidor:</td>
+                    <td>VIP / Privado</td>
+                </tr>
+            </table>
+            <a href="https://www.roblox.com/share?code=b85adf4ea1bf934c992f67c3b019f4d0&type=Server" target="_blank" class="play-btn">🔒 Entrar no Servidor VIP</a>
+        </aside>
+
+    </div>
+
+</body>
+</html>
