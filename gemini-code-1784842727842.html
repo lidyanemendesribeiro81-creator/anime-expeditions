@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animal Hospital Roblox Wiki</title>
+  <style>
+    /* RESET E VARIÁVEIS DE CORES */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    :root {
+      --bg-dark: #000000;
+      --bg-container: #0b0c10;
+      --bg-card: #12141a;
+      --accent-red: #e11d48;
+      --accent-purple: #8b5cf6;
+      --accent-cyan: #06b6d4;
+      --accent-gold: #f59e0b;
+      --text-white: #ffffff;
+      --text-gray: #9ca3af;
+      --border-color: #27272a;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-white);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* BARRA SUPERIOR */
+    .top-header {
+      background-color: #050505;
+      border-bottom: 2px solid var(--accent-red);
+      padding: 12px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--text-white);
+      cursor: pointer;
+    }
+
+    .brand span {
+      color: var(--accent-red);
+    }
+
+    /* BREADCRUMB / NAVEGAÇÃO */
+    .nav-breadcrumb {
+      background-color: #08090c;
+      border-bottom: 1px solid var(--border-color);
+      padding: 10px 30px;
+      font-size: 0.9rem;
+      color: var(--text-gray);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-breadcrumb a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .nav-breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    /* LAYOUT PRINCIPAL */
+    .container {
+      max-width: 1250px;
+      margin: 25px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 25px;
+      width: 100%;
+      flex: 1;
+    }
+
+    /* ÁREA ESQUERDA - CONTEÚDO PRINCIPAL */
+    .main-content {
+      background-color: var(--bg-container);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 25px;
+    }
+
+    /* BOTOES DE DESTAQUE SUPERIORES */
+    .featured-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .btn-featured {
+      background-color: var(--bg-card);
+      border: 1px solid var(--accent-cyan);
+      color: var(--text-white);
+      padding: 14px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1rem;
+      text-align: center;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-featured.tier {
+      border-color: var(--accent-purple);
+    }
+
+    .btn-featured.tips {
+      border-color: var(--accent-gold);
+      color: #fef08a;
+    }
+
+    .btn-featured:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 12px rgba(6, 182, 212, 0.3);
+    }
+
+    /* PAINEL DE CATEGORIAS / NAVEGAÇÃO DA HOME */
+    .nav-categories {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .cat-row {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .cat-label {
+      width: 100px;
+      font-weight: bold;
+      font-size: 0.95rem;
+      color: var(--text-white);
+    }
+
+    .cat-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .btn-cat {
+      background: linear-gradient(180deg, #6d28d9 0%, #4c1d95 100%);
+      border: 1px solid #7c3aed;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: 0.2s;
+    }
+
+    .btn-cat.tips-btn {
+      background: linear-gradient(180deg, #b45309 0%, #78350f 100%);
+      border: 1px solid var(--accent-gold);
+    }
+
+    .btn-cat img {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+    }
+
+    .btn-cat:hover {
+      filter: brightness(1.25);
+      transform: scale(1.02);
+    }
+
+    /* TÍTULOS E SEÇÕES */
+    .section-title {
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 2px solid var(--accent-red);
+      padding-bottom: 8px;
+    }
+
+    .section-title img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+
+    .section-desc {
+      background-color: var(--bg-card);
+      border-left: 4px solid var(--accent-red);
+      padding: 12px 16px;
+      border-radius: 0 6px 6px 0;
+      color: var(--text-gray);
+      font-size: 0.9rem;
+      margin-bottom: 25px;
+      line-height: 1.5;
+    }
+
+    /* GRID DE CARDS DAS CATEGORIAS */
+    .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .item-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 18px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .item-card:hover {
+      border-color: var(--accent-red);
+      transform: translateY(-3px);
+      box-shadow: 0 4px 15px rgba(225, 29, 72, 0.2);
+    }
+
+    .item-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .item-card-icon {
+      font-size: 1.8rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .item-card-icon img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+    }
+
+    .item-card-title {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .item-card-desc {
+      color: var(--text-gray);
+      font-size: 0.85rem;
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+
+    .item-card-badge {
+      align-self: flex-start;
+      background-color: rgba(225, 29, 72, 0.15);
+      border: 1px solid var(--accent-red);
+      color: #fca5a5;
+      font-size: 0.75rem;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    /* PÁGINA DE DETALHES COM LAYOUT FANDOM */
+    .detail-layout {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 20px;
+    }
+
+    @media (max-width: 850px) {
+      .detail-layout {
+        grid-template-columns: 1fr;
+      }
+      .featured-buttons {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .detail-text h3 {
+      color: var(--accent-cyan);
+      margin: 18px 0 8px 0;
+      font-size: 1.1rem;
+    }
+
+    .detail-text p {
+      color: var(--text-gray);
+      line-height: 1.6;
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+    }
+
+    .detail-text ul {
+      margin-left: 20px;
+      color: var(--text-gray);
+      margin-bottom: 15px;
+    }
+
+    .detail-text li {
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+
+    .placeholder-box {
+      background-color: #090a0f;
+      border: 1px dashed var(--accent-red);
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      color: #fda4af;
+      margin: 15px 0;
+      font-size: 0.9rem;
+    }
+
+    .placeholder-box span {
+      display: block;
+      font-size: 2rem;
+      margin-bottom: 5px;
+    }
+
+    /* INFOBOX LATERAL (DIREITA) */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .infobox {
+      background-color: var(--bg-container);
+      border: 2px solid var(--accent-red);
+      border-radius: 12px;
+      padding: 15px;
+    }
+
+    .infobox-title {
+      background-color: var(--accent-red);
+      color: white;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.05rem;
+      padding: 10px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+    }
+
+    /* ESTILO ATUALIZADO DO BANNER */
+    .infobox-banner {
+      width: 100%;
+      height: 150px;
+      background-color: #1a1d24;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      margin-bottom: 15px;
+    }
+
+    .infobox-banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .infobox-data {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .data-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px;
+      background-color: var(--bg-card);
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+
+    .data-label {
+      color: var(--text-gray);
+      font-weight: 600;
+    }
+
+    .data-value {
+      color: var(--text-white);
+      font-weight: 500;
+      text-align: right;
+    }
+
+    .btn-play {
+      background-color: var(--accent-red);
+      color: white;
+      border: none;
+      width: 100%;
+      padding: 12px;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-play:hover {
+      background-color: #f43f5e;
+    }
+
+    /* CODES */
+    .codes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 15px;
+    }
+
+    .code-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--accent-cyan);
+      border-radius: 8px;
+      padding: 15px;
+      position: relative;
+    }
+
+    .code-badge {
+      position: absolute;
+      top: -10px;
+      right: 12px;
+      background-color: var(--accent-cyan);
+      color: #000;
+      font-size: 0.7rem;
+      font-weight: bold;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      margin-top: 4px;
+    }
+
+    .code-name {
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .btn-copy {
+      background-color: var(--accent-cyan);
+      color: #000;
+      border: none;
+      padding: 5px 12px;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+
+    .rewards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+
+    .reward-item {
+      background-color: #08090c;
+      border: 1px solid #1f2937;
+      padding: 5px;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      text-align: center;
+    }
+
+    /* RESPONSIVIDADE */
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="top-header">
+    <div class="brand" onclick="showHome()">
+      ⛩️ <span>Animal Hospital</span> Wiki
+    </div>
+  </header>
+
+  <nav class="nav-breadcrumb" id="breadcrumb">
+    <a href="#" onclick="showHome()">Início</a> <span>/</span> <span>Página Principal</span>
+  </nav>
+
+  <div class="container">
+    
+    <main class="main-content" id="mainView">
+    </main>
+
+    <aside class="sidebar">
+      <div class="infobox" id="sidebarInfobox">
+        <div class="infobox-title">ANIMAL HOSPITAL</div>
+        
+        <div class="infobox-banner">
+          <img src="https://tr.rbxcdn.com/180DAY-db27bdc698b088f2d8352327f7dc64f6/768/432/Image/Webp/noFilter" alt="Banner do Jogo">
+        </div>
+
+        <div class="infobox-data">
+          <div class="data-row">
+            <span class="data-label">Desenvolvedor:</span>
+            <span class="data-value">Animal Anomaly</span>
+          </div>
+          <div class="data-row">
+            <span class="data-label">Gênero:</span>
+            <span class="data-value">Co-op / Horror</span>
+          </div>
+          <div class="data-row">
+            <span class="data-label">Plataforma:</span>
+            <span class="data-value">Roblox</span>
+          </div>
+          <div class="data-row">
+            <span class="data-label">Estado:</span>
+            <span class="data-value" style="color: #4ade80;">Ativo (Night Shift)</span>
+          </div>
+        </div>
+
+        <a href="https://www.roblox.com/share?code=9013a809a6816542aaf6194f1a25a53f&type=Server" target="_blank" class="btn-play">
+          ▶ Jogar Agora
+        </a>
+      </div>
+    </aside>
+
+  </div>
+
+  <script>
+    /* ÍCONES DAS CLASSES EM SVG (IMAGENS) */
+    const icons = {
+      surgeon: `<img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2306b6d4'><path d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z'/></svg>" alt="Surgeon Icon">`,
+      nurse: `<img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238b5cf6'><path d='M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-8 4h2v4h4v2h-4v4h-2v-4H7v-2h4V7z'/></svg>" alt="Nurse Icon">`,
+      agent: `<img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e11d48'><path d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8Mess8z'/></svg>" alt="Agent Icon">`,
+      janitor: `<img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f59e0b'><path d='M15 15d0 2.76-2.24 5-5 5s-5-2.24-5-5 2.24-5 5 2.24 5 5zm-4 1.5h-2v2h2v-2zm8.83-9.92l-1.41-1.41-5.71 5.71 1.41 1.41 5.71-5.71zm-2.12-2.12l1.41 1.41-1.41-1.41z'/></svg>" alt="Janitor Icon">`,
+      ratthew: `<img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239ca3af'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z'/></svg>" alt="Ratthew Icon">`,
+      classesHeader: `<img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238b5cf6'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>" alt="Classes Header Icon">`,
+      tipsHeader: `<img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f59e0b'><path d='M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z'/></svg>" alt="Tips Header Icon">`
+    };
+
+    /* BANCO DE DADOS COMPLETO COM TODAS AS CATEGORIAS DA WIKI */
+    const database = {
+      tips: {
+        title: "Dicas & Truques (Guia de Início)",
+        headerIcon: icons.tipsHeader,
+        desc: "42 dicas essenciais extraídas diretamente dos guias de sobrevivência para dominar o Animal Hospital.",
+        items: {
+          coffee_tips: {
+            name: "Manejo de Café & Sanidade",
+            icon: "☕",
+            badge: "Essencial",
+            type: "Estratégia de Sanidade",
+            spawn: "Cafeteira / Recepção",
+            img: "[IMAGEM: Jogador aplicando a regra dos 2 goles na cafeteira da recepção]",
+            desc: "Dicas cruciais para manter sua Sanidade alta e economizar doses de café ao longo do turno.",
+            details: `
+              <h3>Regra dos 2 Goles (Two-Sip Rule)</h3>
+              <p>Nunca beba o café completamente de uma vez só! Tome apenas <strong>2 goles</strong> por vez. Assim, você sempre terá uma reserva de emergência no copo caso precise recuperar Sanidade repentinamente.</p>
+
+              <h3>Truque do Café para Barney e Headbanger</h3>
+              <ul>
+                <li><strong>Barney:</strong> Dê 2 goles e, ao dar o 3º gole, interaja rapidamente com ele. Você ganha 15 de Sanidade total e ele ainda recebe o café dele.</li>
+                <li><strong>Headbanger:</strong> Dê 2 goles e interaja. Quando a barra de interação estiver quase no fim, dê o último gole.</li>
+              </ul>
+
+              <h3>Afaste o Headbanger da Janela</h3>
+              <p>Se o Headbanger aparecer na janela, entregue um café equipado para fazê-lo ir embora. Tentar espantá-lo sem café fará você perder Sanidade!</p>
+
+              <h3>Rituais e Velas</h3>
+              <p>Você pode utilizar o café equipado para apagar as velas dos Rituais das Anomalias sem consumir nenhum gole do copo.</p>
+            `
+          },
+          monster_survival: {
+            name: "Sobrevivência contra Monstros",
+            icon: "👾",
+            badge: "Combate & Fuga",
+            type: "Guia de Inimigos",
+            spawn: "Corredores e Salas 1-8",
+            img: "[IMAGEM: Mãos de monstro saindo debaixo da cama e jogador jogando xarope de bordo]",
+            desc: "Como repelir Bed Monsters, Hiders, Stalkers, Fantasmas e Tentáculos sem perder vida ou Sanidade.",
+            details: `
+              <h3>Bed Monster (Monstro da Cama)</h3>
+              <p>Entregue um órgão de transplante ou xarope de bordo para ele desaparecer. Você também pode atrair um <strong>Hider</strong> para a área vermelha dele para que o Bed Monster mate o Hider por você!</p>
+
+              <h3>Hiders (Escondidos)</h3>
+              <p>Use extintor, taser ou arma de fogo. Suba em locais altos onde ele não alcança ou corra para longe até ele sumir. <strong>Atenção:</strong> Se você tiver itens no inventário, o Hider roubará um item ao te derrubar em vez de tirar Sanidade direta.</p>
+
+              <h3>Stalker (O Perseguidor)</h3>
+              <p>Ao ouvir o barulho e a luz piscar, <strong>olhe para baixo ou para as pernas dele imediatamente</strong>! Olhar nos olhos do Stalker remove 10 de Sanidade. <em>Dica secreta:</em> Olhar para o Stalker através dos vidros do escritório não ativa o dano de sanidade.</p>
+
+              <h3>Fantasmas e Olhos do Teto</h3>
+              <ul>
+                <li><strong>Fantasmas:</strong> Use o extintor de incêndio para revelá-los no ar e depois finalize com a arma ou taser.</li>
+                <li><strong>Olhos no Teto:</strong> Olhe para baixo para evitar perder Sanidade (evite usar colírio, pois força você a olhar para cima).</li>
+              </ul>
+            `
+          },
+          camera_detection: {
+            name: "Detecção nas Câmeras & Anomalias",
+            icon: "📹",
+            badge: "Triagem Avançada",
+            type: "Identificação de Anomalias",
+            spawn: "Monitores CCTV / Balcão",
+            img: "[IMAGEM: Câmera mostrando um paciente totalmente preto e olhos fixos]",
+            desc: "Sinais visuais sutis que indicam que o paciente no balcão é uma Anomalia perigosa.",
+            details: `
+              <h3>Sinais Garantidos de Anomalia (Feche o Shutter!)</h3>
+              <ul>
+                <li><strong>Olhar Fixo na Câmera:</strong> Pacientes normais nunca encaram a câmera continuamente enquanto andam.</li>
+                <li><strong>Silhueta Totalmente Preta:</strong> O paciente aparece como uma sombra sem rosto nem detalhes na tela.</li>
+                <li><strong>Barra Preta com Olhos Reais:</strong> Uma tarja preta cobre os olhos do paciente com órbitas realistas encarando você.</li>
+                <li><strong>Corpo Curvado / Deformado:</strong> Se a postura das costas estiver torta ou curvada, é 100% anomalia.</li>
+                <li><strong>Orelhas e Chifres Desproporcionais:</strong> Compare o visual do balcão com o monitor lateral; diferenças indicam um Transmorfo.</li>
+              </ul>
+            `
+          },
+          treatment_rituals: {
+            name: "Tratamento & Rituais Curados",
+            icon: "🧪",
+            badge: "Procedimentos",
+            type: "Dicas de Cura",
+            spawn: "Salas de Cirurgia",
+            img: "[IMAGEM: Rito de cura em andamento com colírio equipado apagando velas]",
+            desc: "Como curar Anomalias específicas, realizar cirurgias ultra-rápidas e conter incêndios.",
+            details: `
+              <h3>Anomalias Curáveis via Ritmo/Ritual</h3>
+              <p>Pacientes com <strong>olhos ocos (Hollow-eyed)</strong>, <strong>espasmos (Twitching)</strong> e <strong>foto com estática</strong> podem ser aceitos e curados! Ao iniciar o ritual, use Teardrops/Colírio para apagar as velas com segurança sem perder Sanidade.</p>
+
+              <h3>Acelerando Cirurgias</h3>
+              <p>Permaneça em cima da mesa de cirurgia durante todo o atendimento! Como você estará no centro exato, estará ao alcance de todos os instrumentos sem precisar andar em volta.</p>
+
+              <h3>Controle de Incêndios</h3>
+              <p>Para evitar que fogos surjam aleatoriamente pelo mapa, deixe <strong>1 chama pequena acesa em cada sala</strong> em um canto seguro. Quando todas as salas tiverem 1 chama, o jogo não gerará novos incêndios no hospital.</p>
+            `
+          },
+          advanced_secrets: {
+            name: "Segredos & Truques Avançados",
+            icon: "🗝️",
+            badge: "Dicas Secretas",
+            type: "Otimização & Segredos",
+            spawn: "Lobby & Sala 5",
+            img: "[IMAGEM: Chave dourada caindo de Ratthew para abrir o cofre da Sala 5]",
+            desc: "Atalhos de tempo, segredos dos NPCs, como pegar itens através de paredes e modo AFK.",
+            details: `
+              <h3>Pular Diálogos do Médico</h3>
+              <p>Após completar pelo menos 4 turnos (Shifts), uma opção para <strong>Skip Doctor Dialogue</strong> surgirá no Lobby. Ative para economizar minutos valiosos em cada partida!</p>
+
+              <h3>Segredo da Chave na Sala 5 (Ratthew)</h3>
+              <p>Sempre que o Ratthew surgir pedindo ajuda para se esconder do governo, ajude-o! Ao ir embora, ele soltará uma <strong>Chave Dourada</strong> que abre o Cofre Secreto localizado na Sala 5.</p>
+
+              <h3>O Segredo da Maleta do Barney</h3>
+              <p>Quando Barney aparecer fugindo da polícia, <strong>esconda-o!</strong> Não conte para o policial. Barney o recompensará com uma maleta contendo uma <strong>segunda cafeteira</strong>.</p>
+            `
+          }
+        }
+      },
+      classes: {
+        title: "Classes & Personagens",
+        headerIcon: icons.classesHeader,
+        desc: "Classes jogáveis e suas respectivas habilidades no turno da noite.",
+        items: {
+          surgeon: {
+            name: "Surgeon (Cirurgião)",
+            icon: icons.surgeon,
+            badge: "Tier S (F2P)",
+            type: "Classe Gratuita",
+            spawn: "Início do Jogo",
+            img: "[IMAGEM: O Cirurgião pronto para procedimentos]",
+            desc: "A classe gratuita mais recomendada para o trabalho em equipe. Realiza exames mais rápido e consome menos suprimentos.",
+            details: `
+              <h3>Habilidades Principais</h3>
+              <ul>
+                <li><strong>Tratamento Agilizado:</strong> Reduz o tempo de cirurgia.</li>
+                <li><strong>Eficiência de Itens:</strong> Economiza 15% de durabilidade dos itens.</li>
+              </ul>
+            `
+          },
+          nurse: {
+            name: "Head Nurse (Enfermeira Chefe)",
+            icon: icons.nurse,
+            badge: "Tier S (Robux)",
+            type: "Classe Premium",
+            spawn: "Passe de Classe",
+            img: "[IMAGEM: A Enfermeira Chefe]",
+            desc: "Suporte essencial. Regenera a Sanidade dos aliados próximos e valida documentos rapidamente.",
+            details: `
+              <h3>Habilidades Principais</h3>
+              <ul>
+                <li><strong>Aura de Sanidade:</strong> Aliados próximos recuperam Sanidade.</li>
+                <li><strong>Validação Rápida:</strong> Checa agendamentos na metade do tempo.</li>
+              </ul>
+            `
+          },
+          agent: {
+            name: "Secret Agent (Agente Secreto)",
+            icon: icons.agent,
+            badge: "Tier A (Defesa)",
+            type: "Classe Desbloqueável",
+            spawn: "Conquista",
+            img: "[IMAGEM: O Agente Secreto]",
+            desc: "Classe de defesa tática. Começa munido de uma arma de choque para repelir ameaças físicas.",
+            details: `
+              <h3>Habilidades Principais</h3>
+              <ul>
+                <li><strong>Taser Tático:</strong> Atordoa temporariamente ameaças.</li>
+                <li><strong>Visão Noturna:</strong> Lanterna integrada de alta intensidade.</li>
+              </ul>
+            `
+          },
+          janitor: {
+            name: "Janitor (Zelador)",
+            icon: icons.janitor,
+            badge: "Tier B (Suporte)",
+            type: "Classe Gratuita",
+            spawn: "Início do Jogo",
+            img: "[IMAGEM: O Zelador]",
+            desc: "Especialista em manutenção. Move-se mais rápido e conserta disjuntores com facilidade.",
+            details: `
+              <h3>Habilidades Principais</h3>
+              <ul>
+                <li><strong>Velocidade Aumentada:</strong> Corre 15% mais rápido.</li>
+                <li><strong>Reparo Técnico:</strong> Religará o Gerador na metade do tempo.</li>
+              </ul>
+            `
+          },
+          ratthew: {
+            name: "Ratthew (O Rato Paciente)",
+            icon: icons.ratthew,
+            badge: "Neutro / Modelo",
+            type: "NPC Baseline",
+            spawn: "Balcão da Recepção",
+            img: "[IMAGEM: O pequeno rato Ratthew]",
+            desc: "O paciente padrão da clínica. Serve como modelo para comparação no jogo.",
+            details: `<p>O Ratthew verdadeiro é inofensivo. Alterações visuais indicam uma Anomaly!</p>`
+          }
+        }
+      },
+      enemies: {
+        title: "Todos os Inimigos & Entidades",
+        headerIcon: "🐺",
+        desc: "Entidades perigosas e anomalias que tentam invadir o hospital.",
+        items: {
+          skinwalker: {
+            name: "Skinwalker",
+            icon: "🐺",
+            badge: "Ameaça Extrema",
+            type: "Anomalia Transmorfa",
+            spawn: "Interior do Hospital",
+            img: "[IMAGEM: Skinwalker perseguindo um funcionário]",
+            desc: "A criatura mais letal. Surge se uma Anomaly passar despercebida na recepção.",
+            details: `<p>Ataque resulta em derrota instantânea (Insta-kill). Analise muito bem antes de abrir o shutter.</p>`
+          },
+          stalker: {
+            name: "Stalker",
+            icon: "👁️",
+            badge: "Ameaça Alta",
+            type: "Emboscador Físico",
+            spawn: "Dutos de Ventilação",
+            img: "[IMAGEM: Stalker nos dutos]",
+            desc: "Surgindo nos turnos avançados, usa a tubulação de ar para emboscar jogadores.",
+            details: `<p>Iluminá-lo diretamente com a lanterna ou aplicar Taser fará com que recue.</p>`
+          },
+          eyeless: {
+            name: "Eyeless",
+            icon: "🙈",
+            badge: "Ameaça Média-Alta",
+            type: "Entidade Auditiva",
+            spawn: "Corredores Escuros",
+            img: "[IMAGEM: Criatura sem olhos]",
+            desc: "Entidade cega guiada pelos ruídos produzidos pelos jogadores.",
+            details: `<p>Fique parado e em silêncio ao escutar sua aproximação.</p>`
+          },
+          blackbunny: {
+            name: "Black Bunny",
+            icon: "🐇",
+            badge: "Dreno de Sanidade",
+            type: "Entidade Psicológica",
+            spawn: "Telas de CCTV e Janelas",
+            img: "[IMAGEM: Silhueta de coelho nas câmeras]",
+            desc: "Se manifesta nas telas de segurança e janelas.",
+            details: `<p>Encará-lo por muito tempo drena sua Sanidade. Troque o canal da câmera rapidamente.</p>`
+          }
+        }
+      },
+      mechanics: {
+        title: "Mecânicas & Triagem",
+        headerIcon: "📋",
+        desc: "Sistemas de detecção, regras de inspeção, sanidade e energia.",
+        items: {
+          triagem: {
+            name: "Sistema de Três Verificações",
+            icon: "📋",
+            badge: "Regra Vital",
+            type: "Mecânica Principal",
+            spawn: "Balcão da Recepção",
+            img: "[IMAGEM: Prontuário sendo checado]",
+            desc: "O método obrigatório para verificar se o visitante é um paciente real.",
+            details: `<p>1. Scan Visual | 2. Comparação de Foto | 3. Checagem de Documentos e Áudio.</p>`
+          },
+          sanity: {
+            name: "Gerenciamento de Sanidade",
+            icon: "🧠",
+            badge: "Status do Jogador",
+            type: "Mecânica Global",
+            spawn: "Interface do Jogador",
+            img: "[IMAGEM: Barra de Sanidade baixa]",
+            desc: "Representa a saúde mental do funcionário.",
+            details: `<p>Sanidade baixa causa ilusões visuais e auditivas. Beba café para recuperar.</p>`
+          },
+          generator: {
+            name: "Gerador de Energia",
+            icon: "⚡",
+            badge: "Perigo Ambiental",
+            type: "Manutenção Predial",
+            spawn: "Subsolo / Sala do Gerador",
+            img: "[IMAGEM: Caixa de disjuntores]",
+            desc: "Pode falhar durante tempestades, apagando as luzes e desativando o Shutter.",
+            details: `<p>Mantenha um jogador responsável por religar as chaves rapidamente.</p>`
+          }
+        }
+      },
+      supplies: {
+        title: "Loja & Suprimentos",
+        headerIcon: "🛒",
+        desc: "Itens de sobrevivência comprados com moedas.",
+        items: {
+          coffee: {
+            name: "Coffee (Café)",
+            icon: "☕",
+            badge: "Prioridade 1",
+            type: "Consumível",
+            spawn: "Loja do Hospital",
+            img: "[IMAGEM: Copo de café]",
+            desc: "Restaura Sanidade e concede boost temporário de velocidade.",
+            details: `<p>Item mais importante do jogo para manter a sanidade estável.</p>`
+          },
+          medkit: {
+            name: "Medkit (Kit Médico)",
+            icon: "🩹",
+            badge: "Item Vital",
+            type: "Cura Física",
+            spawn: "Loja do Hospital",
+            img: "[IMAGEM: Kit médico]",
+            desc: "Cura ferimentos físicos infligidos por inimigos.",
+            details: `<p>Útil para recuperar vida após ataques surpresa de monstros.</p>`
+          }
+        }
+      },
+      events: {
+        title: "Eventos Especiais",
+        headerIcon: "🎪",
+        desc: "Emergências que ocorrem aleatoriamente nos turnos.",
+        items: {
+          barney: {
+            name: "Barney Event",
+            icon: "🦖",
+            badge: "Dilema Ético",
+            type: "Evento Aleatório",
+            spawn: "Balcão da Recepção",
+            img: "[IMAGEM: Dinossauro misterioso]",
+            desc: "Um personagem peculiar pede abrigo na recepção.",
+            details: `<p>Escolher ajudá-lo trará recompensas valiosas no decorrer do turno.</p>`
+          },
+          ambulance: {
+            name: "Ambulance Event",
+            icon: "🚑",
+            badge: "Emergência Tática",
+            type: "Modo Crítico",
+            spawn: "Entrada Principal",
+            img: "[IMAGEM: Ambulância parando]",
+            desc: "Descarrega múltiplos pacientes em estado grave simultaneamente.",
+            details: `<p>Exige ação ultra-rápida e dividida da equipe para salvar a todos.</p>`
+          }
+        }
+      },
+      shifts: {
+        title: "Progressão dos Turnos (Shifts)",
+        headerIcon: "🌙",
+        desc: "Guia de escalabilidade da dificuldade dos turnos.",
+        items: {
+          shift13: {
+            name: "Shifts 1 ao 3 (Básico)",
+            icon: "🌙",
+            badge: "Dificuldade Baixa",
+            type: "Introdução",
+            spawn: "Início",
+            img: "[IMAGEM: Turno calmo]",
+            desc: "Fase introdutória para aprender a triagem basilar.",
+            details: `<p>Anomalias com mutações óbvias e fáceis de identificar.</p>`
+          },
+          shift46: {
+            name: "Shifts 4 ao 6 (Intermediário)",
+            icon: "🌕",
+            badge: "Dificuldade Média",
+            type: "Investigação",
+            spawn: "Fase 2",
+            img: "[IMAGEM: Checando dados]",
+            desc: "Anomalias mais sutis usam documentos e fotos falsas.",
+            details: `<p>Exige atenção total ao terminal e comparativo de fotos.</p>`
+          },
+          shift79: {
+            name: "Shifts 7 ao 9 (Avançado)",
+            icon: "🌩️",
+            badge: "Dificuldade Alta",
+            type: "Sobrevivência",
+            spawn: "Fase 3",
+            img: "[IMAGEM: Apagão no hospital]",
+            desc: "Ameaças físicas e apagões constantes ocorrem no hospital.",
+            details: `<p>Trabalho em equipe perfeito é essencial para sobreviver.</p>`
+          }
+        }
+      }
+    };
+
+    /* RENDERIZAR PÁGINA INICIAL DA WIKI */
+    function showHome() {
+      document.getElementById('breadcrumb').innerHTML = `<a href="#" onclick="showHome()">Início</a> <span>/</span> <span>Página Principal</span>`;
+
+      let html = `
+        <div class="featured-buttons">
+          <div class="btn-featured tips" onclick="showCategory('tips')">
+            💡 42 Dicas & Truques
+          </div>
+          <div class="btn-featured" onclick="showCodesView()">
+            🎁 Codes
+          </div>
+          <div class="btn-featured tier" onclick="showCategory('classes')">
+            🏆 Tier List de Classes
+          </div>
+        </div>
+
+        <div class="nav-categories">
+          <div class="cat-row">
+            <div class="cat-label">Guia Rápido</div>
+            <div class="cat-buttons">
+              <button class="btn-cat tips-btn" onclick="showItem('tips', 'coffee_tips')">☕ Manejo de Café</button>
+              <button class="btn-cat tips-btn" onclick="showItem('tips', 'monster_survival')">👾 Sobrevivência</button>
+              <button class="btn-cat tips-btn" onclick="showItem('tips', 'camera_detection')">📹 Câmeras</button>
+              <button class="btn-cat tips-btn" onclick="showItem('tips', 'advanced_secrets')">🗝️ Segredos</button>
+            </div>
+          </div>
+
+          <div class="cat-row">
+            <div class="cat-label">Classes</div>
+            <div class="cat-buttons">
+              <button class="btn-cat" onclick="showItem('classes', 'surgeon')">${icons.surgeon} Surgeon</button>
+              <button class="btn-cat" onclick="showItem('classes', 'nurse')">${icons.nurse} Head Nurse</button>
+              <button class="btn-cat" onclick="showItem('classes', 'agent')">${icons.agent} Secret Agent</button>
+              <button class="btn-cat" onclick="showItem('classes', 'janitor')">${icons.janitor} Janitor</button>
+            </div>
+          </div>
+
+          <div class="cat-row">
+            <div class="cat-label">Inimigos</div>
+            <div class="cat-buttons">
+              <button class="btn-cat" onclick="showItem('enemies', 'skinwalker')">🐺 Skinwalker</button>
+              <button class="btn-cat" onclick="showItem('enemies', 'stalker')">👁️ Stalker</button>
+              <button class="btn-cat" onclick="showItem('enemies', 'eyeless')">🙈 Eyeless</button>
+              <button class="btn-cat" onclick="showItem('enemies', 'blackbunny')">🐇 Black Bunny</button>
+            </div>
+          </div>
+
+          <div class="cat-row">
+            <div class="cat-label">Mecânicas</div>
+            <div class="cat-buttons">
+              <button class="btn-cat" onclick="showItem('mechanics', 'triagem')">📋 Triagem</button>
+              <button class="btn-cat" onclick="showItem('mechanics', 'sanity')">🧠 Sanidade</button>
+              <button class="btn-cat" onclick="showItem('mechanics', 'generator')">⚡ Gerador</button>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="section-title">Explore as Categorias</h2>
+        <div class="items-grid">
+      `;
+
+      for (let key in database) {
+        let cat = database[key];
+        let headerIconHtml = cat.headerIcon ? (cat.headerIcon.startsWith('<img') ? cat.headerIcon : `<span>${cat.headerIcon}</span>`) : '';
+        html += `
+          <div class="item-card" onclick="showCategory('${key}')">
+            <div>
+              <div class="item-card-header">
+                <span class="item-card-icon">${headerIconHtml}</span>
+                <span class="item-card-title">${cat.title}</span>
+              </div>
+              <div class="item-card-desc">${cat.desc}</div>
+            </div>
+            <span class="item-card-badge">Ver Artigos →</span>
+          </div>
+        `;
+      }
+
+      html += `</div>`;
+      document.getElementById('mainView').innerHTML = html;
+
+      // Reseta infobox lateral para o padrão
+      resetSidebar();
+    }
+
+    /* RENDERIZAR LISTA DE ITENS DE UMA CATEGORIA */
+    function showCategory(catKey) {
+      let cat = database[catKey];
+      document.getElementById('breadcrumb').innerHTML = `
+        <a href="#" onclick="showHome()">Início</a> <span>/</span> <span>${cat.title}</span>
+      `;
+
+      let headerIconHtml = cat.headerIcon ? (cat.headerIcon.startsWith('<img') ? cat.headerIcon : `<span>${cat.headerIcon}</span>`) : '';
+
+      let html = `
+        <h2 class="section-title">${headerIconHtml} ${cat.title}</h2>
+        <div class="section-desc">${cat.desc}</div>
+        <div class="items-grid">
+      `;
+
+      for (let itemKey in cat.items) {
+        let item = cat.items[itemKey];
+        let itemIconHtml = item.icon.startsWith('<img') ? item.icon : `<span>${item.icon}</span>`;
+        html += `
+          <div class="item-card" onclick="showItem('${catKey}', '${itemKey}')">
+            <div>
+              <div class="item-card-header">
+                <span class="item-card-icon">${itemIconHtml}</span>
+                <span class="item-card-title">${item.name}</span>
+              </div>
+              <div class="item-card-desc">${item.desc.substring(0, 85)}...</div>
+            </div>
+            <span class="item-card-badge">${item.badge}</span>
+          </div>
+        `;
+      }
+
+      html += `</div>`;
+      document.getElementById('mainView').innerHTML = html;
+    }
+
+    /* RENDERIZAR DETALHES DE UM ITEM E ATUALIZAR A INFOBOX LATERAL */
+    function showItem(catKey, itemKey) {
+      let cat = database[catKey];
+      let item = cat.items[itemKey];
+
+      document.getElementById('breadcrumb').innerHTML = `
+        <a href="#" onclick="showHome()">Início</a> <span>/</span> 
+        <a href="#" onclick="showCategory('${catKey}')">${cat.title}</a> <span>/</span> 
+        <span>${item.name}</span>
+      `;
+
+      let itemIconHtml = item.icon.startsWith('<img') ? item.icon : `<span>${item.icon}</span>`;
+
+      let html = `
+        <h2 class="section-title">${itemIconHtml} ${item.name}</h2>
+        <div class="detail-text">
+          <h3>Visão Geral</h3>
+          <p>${item.desc}</p>
+
+          <div class="placeholder-box">
+            <span>🖼️</span>
+            ${item.img}
+          </div>
+
+          ${item.details}
+        </div>
+      `;
+
+      document.getElementById('mainView').innerHTML = html;
+
+      // Atualiza a Infobox Lateral com os dados do item selecionado
+      document.getElementById('sidebarInfobox').innerHTML = `
+        <div class="infobox-title">${item.name}</div>
+        
+        <div class="infobox-banner" style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+          <span style="font-size:2.5rem; margin-bottom:5px; display:flex; justify-content:center;">${itemIconHtml}</span>
+          <span>${item.type}</span>
+        </div>
+
+        <div class="infobox-data">
+          <div class="data-row">
+            <span class="data-label">Tipo:</span>
+            <span class="data-value">${item.type}</span>
+          </div>
+          <div class="data-row">
+            <span class="data-label">Classificação:</span>
+            <span class="data-value" style="color:var(--accent-red); font-weight:bold;">${item.badge}</span>
+          </div>
+          <div class="data-row">
+            <span class="data-label">Localização:</span>
+            <span class="data-value">${item.spawn}</span>
+          </div>
+        </div>
+
+        <button class="btn-play" onclick="showCategory('${catKey}')">
+          ← Voltar para ${cat.title.split(' ')[0]}
+        </button>
+      `;
+    }
+
+    /* RENDERIZAR VISÃO DE CODES */
+    function showCodesView() {
+      document.getElementById('breadcrumb').innerHTML = `
+        <a href="#" onclick="showHome()">Início</a> <span>/</span> <span>Códigos (Codes)</span>
+      `;
+
+      let html = `
+        <h2 class="section-title">🎁 Todos os Códigos Ativos (Codes)</h2>
+        <div class="section-desc">
+          Resgate os códigos abaixo no menu de definições do jogo para receber Coffee, Medkits, Tokens e Expansões de Sanidade grátis!
+        </div>
+
+        <div class="codes-grid">
+          <div class="code-card">
+            <span class="code-badge">ATIVO</span>
+            <div class="code-header">
+              <span class="code-name">AnimalHospital2026</span>
+              <button class="btn-copy" onclick="copyCode('AnimalHospital2026')">Copiar</button>
+            </div>
+            <div style="font-size:0.75rem; color:var(--accent-cyan); font-weight:bold; text-align:center; margin-bottom:8px;">RECOMPENSAS</div>
+            <div class="rewards-grid">
+              <div class="reward-item">3x Coffee</div>
+              <div class="reward-item">2x Medkit</div>
+              <div class="reward-item">500x Coins</div>
+              <div class="reward-item">+20% Sanity</div>
+            </div>
+          </div>
+
+          <div class="code-card">
+            <span class="code-badge">ATIVO</span>
+            <div class="code-header">
+              <span class="code-name">S3CR3T_ANOMALY</span>
+              <button class="btn-copy" onclick="copyCode('S3CR3T_ANOMALY')">Copiar</button>
+            </div>
+            <div style="font-size:0.75rem; color:var(--accent-cyan); font-weight:bold; text-align:center; margin-bottom:8px;">RECOMPENSAS</div>
+            <div class="rewards-grid">
+              <div class="reward-item">1x Taser Charge</div>
+              <div class="reward-item">1x Battery</div>
+              <div class="reward-item">1000x Coins</div>
+              <div class="reward-item">Badge Rara</div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('mainView').innerHTML = html;
+      resetSidebar();
+    }
+
+    /* RESETAR INFOBOX PARA O PADRÃO DO JOGO */
+    function resetSidebar() {
+      document.getElementById('sidebarInfobox').innerHTML = `
+        <div class="infobox-title">ANIMAL HOSPITAL</div>
+        
+        <div class="infobox-banner">
+          <img src="https://tr.rbxcdn.com/180DAY-db27bdc698b088f2d8352327f7dc64f6/768/432/Image/Webp/noFilter" alt="Banner do Jogo">
+        </div>
+
+        <div class="infobox-data">
+          <div class="data-row">
+            <span class="data-label">Desenvolvedor:</span>
+            <span class="data-value">Animal Anomaly</span>
+          </div>
+          <div class="data-row">
+            <span class="data-label">Gênero:</span>
+            <span class="data-value">Co-op / Horror</span>
+          </div>
+          <div class="data-row">
+            <span class="data-label">Plataforma:</span>
+            <span class="data-value">Roblox</span>
+          </div>
+          <div class="data-row">
+            <span class="data-label">Estado:</span>
+            <span class="data-value" style="color: #4ade80;">Ativo (Night Shift)</span>
+          </div>
+        </div>
+
+        <a href="https://www.roblox.com/share?code=9013a809a6816542aaf6194f1a25a53f&type=Server" target="_blank" class="btn-play">
+          ▶ Jogar Agora
+        </a>
+      `;
+    }
+
+    function copyCode(text) {
+      navigator.clipboard.writeText(text);
+      alert('Código copiado: ' + text);
+    }
+
+    // Carregar a Home ao abrir a página
+    showHome();
+  </script>
+</body>
+</html>
